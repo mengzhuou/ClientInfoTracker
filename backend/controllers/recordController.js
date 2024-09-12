@@ -13,7 +13,7 @@ const getRecords = asyncHandler(async (req, res) => {
 // @route POST /Records
 // @access Private
 const createRecord = asyncHandler(async (req, res) => {
-    const { company, type, jobTitle, date, receivedInterview, websiteLink, comment, click } = req.body;
+    const { name, company, hobby, position, receivedInterview, websiteLink, comment, click } = req.body;
 
     if (!company || !type || !jobTitle || !date || receivedInterview == null || !websiteLink || !comment || click == null) {
         res.status(400);
