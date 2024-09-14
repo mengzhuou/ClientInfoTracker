@@ -2,10 +2,15 @@ General Coding Guideline
 1. Always "git pull" on main branch before creating a new branch
 2. Always make sure your component style (i.e. color, padding, font) matches Figma. 
 3. Always leave comment (but not too much) for complex code.
-4. Always use variable name that is easy to understand (but not too long).
-5. Always check styles from other files and make sure that you follow similar folder structure before asking for PR review. 
-6. Always create the modular component and import to the page.
+4. Always use variable name that is easy to understand (but not too long). variable name should be this style: thisStyleIsFine. 
+6. Always check styles from other files and make sure that you follow similar folder structure before asking for PR review. 
+7. Always create the modular component and import to the page.
 
+PR xxx is ready for review. 
+We only have 1 reviewer. 
+@person if he/she will be benefited from reviewing your PR. 
+Branch convention: 
+  example: CIT-10
 
 ----------------------------------------------------------------------
 Frontend Initial Setup
