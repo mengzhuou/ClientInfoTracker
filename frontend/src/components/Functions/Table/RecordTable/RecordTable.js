@@ -13,14 +13,12 @@ class RecordTable extends Component {
         this.state = {
             records: [],
             columnDefs: [
+                //all attributes: company, name, hobby, importantDate, note, additionalNote, family, birthday, reasonOfKnowing, email, position, phoneNumber
+                { headerName: "Name", field: "name", sortable: true, filter: true, width: 230 },
                 { headerName: "Company", field: "company", sortable: true, filter: true, width: 230 },
-                { headerName: "Type", field: "type", sortable: true, filter: true, width: 130 },
-                { headerName: "Job Title", field: "jobTitle", sortable: true, filter: true, width: 230 },
-                { headerName: "Date", field: "date", sortable: true, filter: true, width: 120 },
-                { headerName: "Interview", field: "receivedInterview", sortable: true, filter: true, width: 110 },
-                { headerName: "Link", field: "websiteLink", sortable: true, filter: true, width: 120 },
-                { headerName: "Comment", field: "comment", sortable: true, filter: true, width: 140 },
-                { headerName: "Click", field: "click", sortable: true, filter: true, width: 130 },
+                { headerName: "Hobby", field: "hobby", sortable: true, filter: true, width: 230 },
+                { headerName: "Important Event Date", field: "importantDate", sortable: true, filter: true, width: 230 },
+                { headerName: "Family", field: "family", sortable: true, filter: true, width: 230 }
             ]
         };
     }
