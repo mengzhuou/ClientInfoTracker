@@ -5,11 +5,10 @@ import TopNavBar from "./components/Functions/TopNavBar/TopNavBar";
 
 
 class App extends Component {
-
   render() {
     return (
       <Router>
-        <TopNavBar/>
+        {window.location.pathname !== 'Entrance' && <TopNavBar/>}
         <Routes>
           <Route path="/" element={<Main/>} />
         </Routes>
