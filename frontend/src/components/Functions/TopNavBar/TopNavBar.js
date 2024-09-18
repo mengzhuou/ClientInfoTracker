@@ -12,7 +12,7 @@ class TopNavBar extends Component {
     }
 
     render() {
-        if (window.location.pathname === "/Entrance") {
+        if (window.location.pathname === "/entrance") {
             return (
                 <div className="navBar"></div>
             );
@@ -24,9 +24,9 @@ class TopNavBar extends Component {
                 </div>
                 <div className="navBar-right">
                     <ul className="nav-list">
-                        <li><NavButton path="/Draft" text="Draft" /></li>
-                        <li><NavButton path="/Client" text="Create Client"/></li>
-                        <li><NavButton path="/Export" text="Export"/></li>
+                        <li><NavButton path="/draft" text="Draft" /></li>
+                        <li><NavButton path="/client" text="Create Client"/></li>
+                        <li><NavButton path="/export" text="Export"/></li>
                     </ul>
                 </div>
             </div>
