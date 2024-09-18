@@ -12,6 +12,11 @@ class TopNavBar extends Component {
     }
 
     render() {
+        if (window.location.pathname === "/Entrance") {
+            return (
+                <div className="navBar"></div>
+            );
+        }   
         return (
             <div className="navBar">
                 <div className="navBar-left">

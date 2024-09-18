@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        {window.location.pathname !== 'Entrance' && <TopNavBar/>}
+        <TopNavBar/>
         <Routes>
           <Route path="/" element={<Main/>} />
         </Routes>

@@ -7,6 +7,7 @@
     top: 0; 
     left: 0;
     width: 100%;
+    min-height: 60px;
     /* make topnavbar on top of other content */
     z-index: 3;
 }
