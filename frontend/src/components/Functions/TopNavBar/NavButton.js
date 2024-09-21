@@ -1,12 +1,16 @@
-import { Link } from 'react-router-dom';
+import { withFuncProps } from "../../withFuncProps";
 import './TopNavBar.css';
 
-function NavButton({ path, text }) {
+function NavButton({ path, text, navigate }) {
+    const handleClick = () => {
+        navigate(path);
+    };
+
     return (
-        <Link to={path} className="nav-button">
+        <button onClick={handleClick} className="nav-button">
             {text}
-        </Link>
+        </button>
     );
 }
 
-export default NavButton;
+export default withFuncProps(NavButton);
