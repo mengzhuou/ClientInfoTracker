@@ -5,6 +5,7 @@ import TopNavBar from "./components/Functions/TopNavBar/TopNavBar";
 
 
 class App extends Component {
+
   render() {
     return (
       <Router>
