@@ -1,5 +1,5 @@
 import { withFuncProps } from "../../withFuncProps";
-import './TopNavBar.css';
+import './NavButton.css';
 
 function NavButton({ path, text, navigate }) {
     const handleClick = () => {

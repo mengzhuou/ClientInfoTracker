@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withFuncProps } from "../../withFuncProps";
-import NavButton from "./NavButton"
+import NavButton from "../../Button/NavButton/NavButton"
 import './TopNavBar.css';
 
 class TopNavBar extends Component {
