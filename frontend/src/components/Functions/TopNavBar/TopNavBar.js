@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withFuncProps } from "../../withFuncProps";
+import NavButton from "../../Button/NavButton/NavButton"
 import './TopNavBar.css';
 
 class TopNavBar extends Component {
@@ -11,10 +12,22 @@ class TopNavBar extends Component {
     }
 
     render() {
+        /*if (window.location.pathname === "/entercode") {
+            return (
+                <div className="navBar"></div>
+            );
+        }*/
         return (
             <div className="navBar">
                 <div className="navBar-left">
                     <div className="navTitle">Zwj Info Tracker</div>
+                </div>
+                <div className="navBar-right">
+                    <ul className="nav-list">
+                        <li><NavButton path="/draft" text="Draft" /></li>
+                        <li><NavButton path="/client" text="Create Client" /></li>
+                        <li><NavButton path="/export" text="Export" /></li>
+                    </ul>
                 </div>
             </div>
         );
