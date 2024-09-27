@@ -17,7 +17,7 @@ class RecordTable extends Component {
                 { headerName: "Name", field: "name", sortable: true, filter: true, width: 230 },
                 { headerName: "Company", field: "company", sortable: true, filter: true, width: 230 },
                 { headerName: "Hobby", field: "hobby", sortable: true, filter: true, width: 230 },
-                { headerName: "Important Event Date", field: "importantDate", sortable: true, filter: true, width: 230 },
+                { headerName: "Important Event Date", field: "importantDate", sortable: true, filter: true, width: 230, valueFormatter: this.dateFormatter },
                 { headerName: "Family", field: "family", sortable: true, filter: true, width: 230 }
             ]
         };
@@ -35,6 +35,15 @@ class RecordTable extends Component {
             console.error("Error loading records:", error);
         }
     };
+
+    //parse the date format to year-Month-day by get rid of the stuffs after T
+    dateFormatter = (params) => {
+        const date = new Date(params.value);
+        if(!isNaN(date)) {
+            return date.toISOString().split('T')[0];
+        }
+        return params.value;
+    }
 
     render() {
         return (
