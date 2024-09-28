@@ -1,0 +1,37 @@
+.search-container {
+  padding: 10px;
+  margin-top: 30px; /* Search bar under header */
+}
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  border: 1px solid #D2A37E;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.search-icon {
+  position: absolute;
+  right: 10px; /* Adjust based on padding */
+  font-size: 18px; /* Adjust size as needed */
+  color: #D2A37E; /* Match your border color or adjust as needed */
+}
+
+.client-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.client-table th, .client-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
