@@ -2,12 +2,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #3361AE;   
+    background-color: #CB997E;   
     position: fixed;
     top: 0; 
     left: 0;
     width: 100%;
-    /* make topnavbar on top of other content */
+    min-height: 40px;
     z-index: 3;
 }
   
@@ -30,6 +30,25 @@
     justify-content: flex-end;
 }
 
+.navTitle {
+    font-family: "Tiro Devanagari Hindi";
+    font-size: clamp(1rem, 3vw, 2rem);
+    font-weight: 300;
+    white-space: nowrap;
+    text-align: center;
+    color: #000000;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.5);
+    -webkit-text-stroke-width: clamp(1px, 0.3vw, 2px);
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: clamp(1rem, 3vw, 2rem);
+}
+
 .userIcon{
     margin-right: 4%;
     font-size: 25px;
@@ -43,8 +62,6 @@
     cursor: pointer;
     color: #FFFFFF;
 }
-
-
 
 .dropdown-container {
     position: absolute;

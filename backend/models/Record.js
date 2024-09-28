@@ -1,37 +1,50 @@
 const mongoose = require('mongoose')
 
 const recordSchema = new mongoose.Schema({
+    //company, name, hobby, importantDate, note, additionalNote, family, birthday, reasonOfKnowing, email, position, phoneNumber
     company: {
         type: String,
         required: true
     },
-    type: {
+    name: {
         type: String,
         required: true
     },
-    jobTitle: {
+    hobby: {
         type: String,
         required: true
     },
-    date: {
+    importantDate: {
         type: Date,
-        required: true
+        required: false
     },
-    receivedInterview: {
-        type: Boolean,
-        required: true
-    },
-    websiteLink: {
+    note: {
         type: String,
-        required: true
+        required: false
     },
-    comment: {
+    additionalNote: {
         type: String,
-        required: true
+        required: false
     },
-    click: {
+    family: {
+        type: String,
+        required: false
+    },
+    reasonOfKnowing: {
+        type: String,
+        required: false
+    },
+    email: {
+        type: String,
+        required: false
+    },
+    position: {
+        type: String,
+        required: false
+    },
+    phoneNumber: {
         type: Number,
-        required: true
+        required: false
     }
 })
 

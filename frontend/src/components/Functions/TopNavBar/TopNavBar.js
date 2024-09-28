@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { withFuncProps } from "../../withFuncProps";
+import NavButton from "../../Button/NavButton/NavButton"
 import './TopNavBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
-
 
 class TopNavBar extends Component {
     constructor(props) {
@@ -15,30 +15,12 @@ class TopNavBar extends Component {
         };
     }
 
-    toggleDropdown = () => {
-        const { isDroppedDown } = this.state;
-        this.setState({isDroppedDown: !isDroppedDown})
-    }
-    
-    // profileNav = () => {
-    //     this.props.navigate("/Profile");
-    // }
-
-    // notificationeNav = () => {
-    //     this.props.navigate("/Notification");
-    // }
-
-    logoutNav = () => {
-        // goes to EnterCode page for now
-        this.props.navigate("/");
-        const { isDroppedDown } = this.state;
-        this.setState({isDroppedDown: !isDroppedDown})
-    }
-
-
-
     render() {
-        const { isDroppedDown } = this.state;
+        /*if (window.location.pathname === "/entercode") {
+            return (
+                <div className="navBar"></div>
+            );
+        }*/
         return (
             <div className="navBar">
                 <div className="navBar-left">
@@ -47,14 +29,11 @@ class TopNavBar extends Component {
                     </div>
                 </div>
                 <div className="navBar-right">
-                    <div className="userIcon" onClick={this.toggleDropdown}>
-                        <FontAwesomeIcon icon={faCircleUser} />
-                    </div>
-                    <div className="dropdownIcon">
-                        <FontAwesomeIcon icon={isDroppedDown? faAngleUp: faAngleDown} onClick={this.toggleDropdown}/>
-                        
-
-                    </div>
+                    <ul className="nav-list">
+                        <li><NavButton path="/draft" text="Draft" /></li>
+                        <li><NavButton path="/client" text="Create Client" /></li>
+                        <li><NavButton path="/export" text="Export" /></li>
+                    </ul>
                 </div>
             </div>
         );
