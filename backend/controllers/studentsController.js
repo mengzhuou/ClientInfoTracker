@@ -1,3 +1,9 @@
+/**
+ * @Yingqi note:
+ * I think in this case, we can delete this whole file since it is unrelated to our client info
+ */
+
+
 const asyncHandler = require("express-async-handler");
 const Student = require('../models/Student');
 
