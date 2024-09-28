@@ -13,40 +13,29 @@ const getRecords = async () => {
 };
 
 const createRecord = async (data) => {
-    const { company, type, jobTitle, date, receivedInterview, websiteLink, comment, click } = data;
+    const { company, name, hobby, importantDate, note, additionalNote, family, birthday, reasonOfKnowing, email, position, phoneNumber} = data;
 
     // Frontend Validation
     if (!company || typeof company !== 'string') {
         throw new Error('Company is required and must be a string');
     }
 
-    if (!type || typeof type !== 'string') {
-        throw new Error('Type is required and must be a string');
+    if (!name || typeof name !== 'string') {
+        throw new Error('Name is required and must be a string');
     }
 
-    if (!jobTitle || typeof jobTitle !== 'string') {
-        throw new Error('Job title is required and must be a string');
+    if (!hobby || typeof hobby !== 'string') {
+        throw new Error('Hobby is required and must be a string');
     }
+    // No need to have other validation or testing for other variables since it is not mandatory
 
-    if (!date || isNaN(Date.parse(date))) {
-        throw new Error('Valid date is required');
-    }
+    // if (!birthday || isNaN(Date.parse(birthday))) {
+    //     throw new Error('Valid date is required');
+    // }
 
-    if (receivedInterview == null || typeof receivedInterview !== 'boolean') {
-        throw new Error('Received interview status is required and must be a boolean');
-    }
-
-    if (!websiteLink || typeof websiteLink !== 'string') {
-        throw new Error('Website link is required and must be a string');
-    }
-
-    if (!comment || typeof comment !== 'string') {
-        throw new Error('Comment is required and must be a string');
-    }
-
-    if (click == null || typeof click !== 'number') {
-        throw new Error('Click count is required and must be a number');
-    }
+    // if (!importantDate || isNaN(Date.parse(importantDate))) {
+    //     throw new Error('Valid important event date is required');
+    // }
 
     try {
         const res = await axios.post(`${BACKEND_URL}/records`, data, {
