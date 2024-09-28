@@ -4,7 +4,7 @@ import './TopNavBar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
 import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
-
+import { Link } from "react-router-dom";
 
 
 class TopNavBar extends Component {
@@ -42,7 +42,9 @@ class TopNavBar extends Component {
         return (
             <div className="navBar">
                 <div className="navBar-left">
-                    <div className="navTitle">Zwj Info Tracker</div>
+                    <div className="navTitle">Zwj Info Tracker
+                    <Link to="/DraftPage"> Draft Page </Link>
+                    </div>
                 </div>
                 <div className="navBar-right">
                     <div className="userIcon" onClick={this.toggleDropdown}>
