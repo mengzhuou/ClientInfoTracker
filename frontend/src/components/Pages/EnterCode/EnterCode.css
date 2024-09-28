@@ -1,0 +1,50 @@
+.enter-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+  
+.enter-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  height: 22.5%;
+  background-color:#b5a18d34;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+  
+input {
+  padding: 10px;
+  font-size: 16px;
+  width: 325px;
+  border: none;
+  background-color: #c2bfbe6b;
+}
+
+input:focus {
+  outline: none;
+}
+
+button {
+  border-radius: 25px;
+  margin: 30px auto 10px auto;
+  width: 100px;
+  padding: 10px;
+  background-color: #CB997E;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+  
+button:hover {
+  background-color: #b4866d;
+}
