@@ -25,7 +25,6 @@ class TopNavBar extends Component {
             <div className="navBar">
                 <div className="navBar-left">
                     <div className="navTitle">Zwj Info Tracker
-                    <Link to="/DraftPage"> Draft Page </Link>
                     </div>
                 </div>
                 <div className="navBar-right">

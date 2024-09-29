@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import DeletePopup from 'frontend/src/components/Functions/DeletePopup';
+import DeletePopup from '../../Functions/DeletePopup/DeletePopup.js';
 
 const DraftPage = () => {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const handleDeleteClick = () => {
-    setIsPopupOpen(true);
-  };
+  const [isPopupOpen, setIsPopupOpen] = useState(true);
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);
@@ -19,8 +15,6 @@ const DraftPage = () => {
 
   return (
     <div>
-      <h1>Draft Page</h1>
-      <button onClick={handleDeleteClick}>Delete</button>
       {isPopupOpen && (
         <DeletePopup 
           onClose={handleClosePopup} 

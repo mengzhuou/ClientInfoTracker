@@ -1,12 +1,16 @@
 import React from 'react';
+import './DeletePopup.css';
 
 const DeletePopup = ({ onClose, onConfirm }) => {
   return (
-    <div className="modal">
+    <div className="modal-overlay">
       <div className="modal-content">
-        <h2>Are you sure you want to delete this draft?</h2>
-        <button onClick={onConfirm}>Yes, Delete</button>
-        <button onClick={onClose}>Cancel</button>
+        <h3>Prompt</h3>
+        <p>Delete this draft?</p>
+        <div className="modal-actions">
+          <button className="action-btn cancel" onClick={onClose}>Cancel</button>
+          <button className="action-btn confirm" onClick={onConfirm}>Confirm</button>
+        </div>
       </div>
     </div>
   );

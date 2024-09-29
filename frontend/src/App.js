@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Main from "./components/Pages/MainPage/MainPage";
 import TopNavBar from "./components/Functions/TopNavBar/TopNavBar";
-import DraftPage from './components/Pages/MainPage/DraftPage/DraftPage';
+import DraftPage from './components/Pages/DraftPage/DraftPage';
 class App extends Component {
 
   render() {
