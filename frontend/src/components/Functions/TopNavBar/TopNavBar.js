@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { withFuncProps } from "../../withFuncProps";
 import NavButton from "../../Button/NavButton/NavButton"
+import ExportButton from "../../Button/ExportButton/ExportButton";  
+
 import './TopNavBar.css';
 
 class TopNavBar extends Component {
@@ -26,8 +28,8 @@ class TopNavBar extends Component {
                     <ul className="nav-list">
                         <li><NavButton path="/draft" text="Draft" /></li>
                         <li><NavButton path="/client" text="Create Client" /></li>
-                        <li><NavButton path="/export" text="Export" /></li>
-                    </ul>
+                        <li><ExportButton BACKEND_URL={process.env.REACT_APP_BACKEND_URL} /></li>
+                        </ul>
                 </div>
             </div>
         );
