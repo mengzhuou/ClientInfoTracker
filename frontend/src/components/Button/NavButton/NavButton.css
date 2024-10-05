@@ -14,5 +14,10 @@
     transition-duration: 0.4s;
     &:hover {
         background-color: rgb(64, 64, 64);
+        cursor: pointer;
+    }
+    &:active {
+        transition-duration: 0.1s;
+        background-color: rgb(30, 30, 30);
     }
 }
