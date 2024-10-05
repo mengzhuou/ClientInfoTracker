@@ -1,27 +1,48 @@
 .search-container {
   padding: 10px;
   margin-top: 30px; /* Search bar under header */
+  width: 435px;
+  height: 60px;
 }
 
 .search-bar {
   position: relative;
   display: flex;
   align-items: center;
+  width: 393px; /* Match outer frame width */
+  height: 34px; /* Match frame height */
 }
 
 .search-input {
-  border: 1px solid #D2A37E;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 16px;
-  width: 100%;
+  border: 3px solid #CB997E; /* Match border color */
+  padding: 5px 15px; /* Adjusted padding for balance */
+  border-radius: 10px; /* Apply rounded corners to all corners */
+  font-family: 'Montserrat', sans-serif; /* Set font */
+  font-weight: 700; /* Set font weight */
+  font-size: 28px; /* Adjusted font size for fitting */
+  line-height: 34px; /* Match line height to font size */
+  width: 395px; /* Match inner box width */
+  height: 34.13x; 
 }
 
 .search-icon {
   position: absolute;
   right: 10px; /* Adjust based on padding */
-  font-size: 18px; /* Adjust size as needed */
-  color: #D2A37E; /* Match your border color or adjust as needed */
+  width: 25.44px; /* Match icon width */
+  height: 25.44px; /* Match icon height */
+  color: #D2A37E; /* Match your border color */
+}
+
+.search-bar::before {
+  content: '\f002'; /* Unicode for Font Awesome search icon */
+  font-family: 'Font Awesome 5 Free'; /* Use the correct font family */
+  font-weight: 900; /* Use the solid style */
+  position: absolute;
+  right: 15px; /* Position it as needed */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust vertical alignment */
+  color: #D2A37E; /* Match your border color */
+  font-size: 20px; /* Adjust size as needed */
 }
 
 .client-table {

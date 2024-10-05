@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withFuncProps } from "../../withFuncProps";
 import RecordTable from "../../Functions/Table/RecordTable/RecordTable"; // Correct path to RecordTable
-import ClientSearch from "../../ClientSearch"; // Correct path to ClientSearch
+import ClientSearch from "../../ClientSearch";
 import './MainPage.css';
 import { getRecords } from "../../connector.js";
 
