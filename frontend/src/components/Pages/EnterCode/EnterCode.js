@@ -5,13 +5,16 @@ import './EnterCode.css'
 const EnterCode = () => {
   const [enterCode, setEnterCode] = useState('');
   const navigate = useNavigate();
-
+  const [errorMessage, setErrorMessage] = useState('');
+  
   const correctCode = '54321';
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (enterCode === correctCode) {
       navigate('/MainPage');
+    } else {
+      setErrorMessage('Please enter a valid code');
     }
   };
 
@@ -26,6 +29,7 @@ const EnterCode = () => {
                 onChange={(e) => setEnterCode(e.target.value)}
                 placeholder="Access Code"
             />
+            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
             <button type="submit">Submit</button>
             </form>
         </div>
