@@ -1,0 +1,51 @@
+.draft-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #FFF;
+    padding: 30px 20px 30px 20px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.draft-button:hover {
+    background-color: #e2e6ea;
+}
+
+.draft-name {
+    text-wrap: nowrap;
+    padding-right: 200px;
+    color: #000;
+    font-family: "Montserrat";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.draft-date {
+    text-wrap: nowrap;
+    align-items: center;
+    display: flex;
+    color: #9C9C9C;
+    text-align: center;
+    font-family: "Montserrat";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.trash-icon {
+    font-size: 40px;
+    margin-left: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.trash-icon:hover {
+    color: #c82333;
+}

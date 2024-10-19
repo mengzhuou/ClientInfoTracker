@@ -50,6 +50,13 @@ const recordSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    draftStatus: {
+        type: Boolean,
+        required: true,
+        default: false
+    }
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('Record', recordSchema)
