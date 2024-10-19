@@ -61,9 +61,23 @@
     font-size: 30px;
     cursor: pointer;
     color: #FFFFFF;
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-bottom: 3px;
+    border-radius: 10px;
+    transition-duration: 0.4s;
+    &:hover {
+        background-color: rgb(64, 64, 64);
+    }
+    &:active {
+        transition-duration: 0.1s;
+        background-color: rgb(30, 30, 30);
+    }
 }
 
 .dropdown-container {
+    opacity: 0;
+    visibility: hidden;
     display: none;
     list-style: none;
     padding: 0;
@@ -75,38 +89,39 @@
     width: auto;
     height: auto;
     align-items: stretch;
-    border-radius: 0 0 10% 10%;
+    border-radius: 10%;
     border: 2px solid black;
     overflow: hidden;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
     margin-right: 2%;
-    border-top: none;
-    transition: all 0.5s ease;
 }
 
+.dropdown-container.show {
+    animation: fadeIn 0.2s forwards;
+}
+
+.dropdown-container.hide {
+    animation: fadeOut 0.2s forwards;
+}
 
 .dropdown-content {
     font-family: "Tiro Devanagari Hindi";
-    position: relative;
     font-size: 21px;
     padding: 5px 5px 5px 5px;
     color: #FFFFFF;
-    border-bottom: 2px solid black;
     text-align: center;
     cursor: pointer;
     width: 100%;
-    border-color: black;
-    border-style: solid none solid none;
+    border-style: none none none none;
     background-color: rgb(122, 122, 122);  
     transition-duration: 0.4s;
     &:hover {
         background-color: rgb(61, 61, 61);
-        cursor: pointer;
     }
     &:active {
         transition-duration: 0.1s;
         background-color: rgb(30, 30, 30);
-        border-style: solid none solid none;
+        border-style: none none none none;
     }
 }
 
@@ -122,6 +137,32 @@
         display: flex;
     }
     .dropdownIcon {
-        display: block;
+        display: flex;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
     }
 }

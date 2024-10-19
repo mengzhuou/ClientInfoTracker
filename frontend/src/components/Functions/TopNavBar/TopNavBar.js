@@ -8,8 +8,11 @@ class TopNavBar extends Component {
         super(props);
         this.state = {
             isDroppedDown: false,
+            animationClass: "",
+            isAnimating: false
         };
         this.menuRef = React.createRef();
+        this.iconRef = React.createRef();
     }
 
     componentDidMount() {
@@ -21,18 +24,33 @@ class TopNavBar extends Component {
     }
 
     closeDropdown = (e) => {
-        if (e.target !== this.menuRef.current) {
+        if (this.menuRef.current && e.target !== this.menuRef.current && 
+            this.iconRef.current && !this.iconRef.current.contains(e.target) &&
+            !this.state.isAnimating) {
             this.setState({
-                isDroppedDown: false   
+                animationClass: "hide",
+                isAnimating: true
             });
+            setTimeout(() => this.setState({ isDroppedDown: false, isAnimating: false }), 200);
         }
     };
 
     toggleDropdown = (e) => {
-        e.stopPropagation();
-        this.setState(prevState => ({
-            isDroppedDown: !prevState.isDroppedDown,
-        }));
+        if (this.state.isAnimating) return;
+        if (this.state.isDroppedDown) {
+            this.setState({
+                animationClass: "hide",
+                isAnimating: true
+            });
+            setTimeout(() => this.setState({ isDroppedDown: false, isAnimating: false }), 200);
+        } else {
+            this.setState({
+                animationClass: "show",
+                isDroppedDown: true,
+                isAnimating: true
+            });
+            setTimeout(() => this.setState({isAnimating: false }), 200);
+        }
     };
 
     render() {
@@ -52,12 +70,12 @@ class TopNavBar extends Component {
                         <li><NavButton className="nav-button" path="/client" text="Create Client" /></li>
                         <li><NavButton className="nav-button" path="/export" text="Export" /></li>
                     </ul>
-                    <div className="dropdownIcon" onClick={this.toggleDropdown}>
+                    <div ref={this.iconRef} className="dropdownIcon" onClick={this.toggleDropdown}>
                         &#9776;
                     </div>
                     {this.state.isDroppedDown ? (
-                    <ul ref={this.menuRef} className="dropdown-container">
-                        <li><NavButton className="dropdown-content" path="/draft" text="Draft" /></li>
+                    <ul ref={this.menuRef} className={`dropdown-container ${this.state.animationClass}`}>
+                        <li><NavButton className={`dropdown-content ${this.state.isDroppedDown ? "show" : ""}`} path="/draft" text="Draft" /></li>
                         <li><NavButton className="dropdown-content" path="/client" text="Create Client" /></li>
                         <li><NavButton className="dropdown-content" path="/export" text="Export" /></li>
                     </ul>
