@@ -62,12 +62,13 @@ class TopNavBar extends Component {
         return (
             <div className="navBar">
                 <div className="navBar-left">
-                    <div className="navTitle">Zwj Info Tracker</div>
+                    <NavButton className="navTitle" path="/" text="Zwj Info Tracker" />
                 </div>
+
                 <div className="navBar-right">
                     <ul className="nav-list">
                         <li><NavButton className="nav-button" path="/draft" text="Draft" /></li>
-                        <li><NavButton className="nav-button" path="/client" text="Create Client" /></li>
+                        <li><NavButton className="nav-button" path="/create-client" text="Create Client" /></li>
                         <li><NavButton className="nav-button" path="/export" text="Export" /></li>
                     </ul>
                     <div ref={this.iconRef} className="dropdownIcon" onClick={this.toggleDropdown}>

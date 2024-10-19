@@ -39,6 +39,8 @@
     color: #000000;
     text-shadow: 0px 4px 4px rgba(0,0,0,0.5);
     -webkit-text-stroke-width: clamp(1px, 0.3vw, 2px);
+    background-color: transparent;
+    border: none;
 }
 
 .nav-list {

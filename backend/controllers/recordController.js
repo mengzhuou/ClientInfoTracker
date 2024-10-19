@@ -13,26 +13,23 @@ const getRecords = asyncHandler(async (req, res) => {
 // @route POST /Records
 // @access Private
 const createRecord = asyncHandler(async (req, res) => {
-    const { company, name, hobby, importantDate, note, additionalNote, family, birthday, reasonOfKnowing, email, position, phoneNumber} = req.body;
-
-    if (!company || !name || !hobby) {
-        res.status(400);
-        throw new Error('Please provide all required record fields');
-    }
+    const { name, company, hobby, importantDate, note, familySituation,
+        birthday, reasonOfKnowing, position, phoneNumber, email,
+        additionalNote} = req.body;
 
     const newRecord = new Record({
+        name,
         company,
-        name, 
-        hobby, 
-        importantDate, 
-        note, 
-        additionalNote, 
-        family, 
-        birthday, 
-        reasonOfKnowing, 
-        email, 
-        position, 
-        phoneNumber
+        hobby,
+        importantDate,
+        note,
+        familySituation,
+        birthday,
+        reasonOfKnowing,
+        position,
+        phoneNumber,
+        email,
+        additionalNote
     });
 
     const savedRecord = await newRecord.save();
