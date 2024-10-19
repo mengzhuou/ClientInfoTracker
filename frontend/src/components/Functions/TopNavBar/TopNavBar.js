@@ -23,7 +23,7 @@ class TopNavBar extends Component {
     closeDropdown = (e) => {
         if (e.target !== this.menuRef.current) {
             this.setState({
-                isDroppedDown: false   
+                isDroppedDown: false
             });
         }
     };
@@ -50,7 +50,7 @@ class TopNavBar extends Component {
                 <div className="navBar-right">
                     <ul className="nav-list">
                         <li><NavButton className="nav-button" path="/draft" text="Draft" /></li>
-                        <li><NavButton className="nav-button" path="/client" text="Create Client" /></li>
+                        <li><NavButton className="nav-button" path="/create-client" text="Create Client" /></li>
                         <li><NavButton className="nav-button" path="/export" text="Export" /></li>
                     </ul>
                     <div className="dropdownIcon" onClick={this.toggleDropdown}>

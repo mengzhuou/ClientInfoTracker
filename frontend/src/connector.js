@@ -8,12 +8,12 @@ const getRecords = async () => {
         return res.data;
     } catch (error) {
         console.error("Error fetching records:", error);
-        throw error; 
+        throw error;
     }
 };
 
 const createRecord = async (data) => {
-    const { company, name, hobby, importantDate, note, additionalNote, family, birthday, reasonOfKnowing, email, position, phoneNumber} = data;
+    const { name, company, hobby } = data;
 
     // Frontend Validation
     if (!company || typeof company !== 'string') {
@@ -27,15 +27,6 @@ const createRecord = async (data) => {
     if (!hobby || typeof hobby !== 'string') {
         throw new Error('Hobby is required and must be a string');
     }
-    // No need to have other validation or testing for other variables since it is not mandatory
-
-    // if (!birthday || isNaN(Date.parse(birthday))) {
-    //     throw new Error('Valid date is required');
-    // }
-
-    // if (!importantDate || isNaN(Date.parse(importantDate))) {
-    //     throw new Error('Valid important event date is required');
-    // }
 
     try {
         const res = await axios.post(`${BACKEND_URL}/records`, data, {
@@ -46,7 +37,7 @@ const createRecord = async (data) => {
         return res.data;
     } catch (error) {
         console.error("Error creating record:", error);
-        throw error; 
+        throw error;
     }
 };
 
