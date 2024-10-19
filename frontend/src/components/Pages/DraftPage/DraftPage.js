@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DeletePopup from '../../Functions/DeletePopup/DeletePopup.js';
+import DeletePopup from '../../Functions/PopupModals/DeletePopup/DeletePopup.js';
 
 const DraftPage = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(true);

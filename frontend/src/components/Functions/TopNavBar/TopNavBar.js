@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import { withFuncProps } from "../../withFuncProps";
 import NavButton from "../../Button/NavButton/NavButton"
 import './TopNavBar.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
-import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons';
-import { Link } from "react-router-dom";
 
 class TopNavBar extends Component {
     constructor(props) {
@@ -48,9 +44,9 @@ class TopNavBar extends Component {
         return (
             <div className="navBar">
                 <div className="navBar-left">
-                    <div className="navTitle">Zwj Info Tracker
-                    </div>
+                    <NavButton className="navTitle" path="/" text="Zwj Info Tracker" />
                 </div>
+
                 <div className="navBar-right">
                     <ul className="nav-list">
                         <li><NavButton className="nav-button" path="/draft" text="Draft" /></li>

@@ -8,16 +8,6 @@ main-page-body {
     padding: 20px;
 }
 
-.main-page-container {
-    width: 90%;
-    height: 90%;
-    max-width: 1200px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-}
-
 .h1 {
     position: relative;
 }
