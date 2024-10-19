@@ -13,7 +13,20 @@ const getRecords = async () => {
 };
 
 const createRecord = async (data) => {
+    const { name, company, hobby } = data;
 
+    // Frontend Validation
+    if (!company || typeof company !== 'string') {
+        throw new Error('Company is required and must be a string');
+    }
+
+    if (!name || typeof name !== 'string') {
+        throw new Error('Name is required and must be a string');
+    }
+
+    if (!hobby || typeof hobby !== 'string') {
+        throw new Error('Hobby is required and must be a string');
+    }
 
     try {
         const res = await axios.post(`${BACKEND_URL}/records`, data, {
