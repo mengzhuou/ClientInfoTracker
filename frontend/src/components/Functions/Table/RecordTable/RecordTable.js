@@ -12,9 +12,9 @@ class RecordTable extends Component {
                 { headerName: "Company", field: "company", sortable: true, width: 180 },
                 { headerName: "Hobby", field: "hobby", sortable: true, width: 190 },
                 { headerName: "Important Event Date", field: "importantDate", sortable: true, width: 300, valueFormatter: this.dateFormatter },
-                { headerName: "Family", field: "family", sortable: true, width: 300 }
+                { headerName: "Family", field: "familySituation", sortable: true, width: 300 }
             ],
-            defaultColDef: { sortable: true, resizable: true }, 
+            defaultColDef: { sortable: true, resizable: true },
             domLayout: 'autoHeight',
             suppressHorizontalScroll: true
         };

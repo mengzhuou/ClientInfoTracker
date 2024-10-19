@@ -8,12 +8,12 @@ const getRecords = async () => {
         return res.data;
     } catch (error) {
         console.error("Error fetching records:", error);
-        throw error; 
+        throw error;
     }
 };
 
 const createRecord = async (data) => {
-    const { company, name, hobby, importantDate, note, additionalNote, family, birthday, reasonOfKnowing, email, position, phoneNumber} = data;
+    const { name, company, hobby, importantDate, note, familySituation, birthday, reasonOfKnowing, position, phoneNumber, email, additionalNote} = data;
 
     // Frontend Validation
     if (!company || typeof company !== 'string') {
@@ -46,7 +46,7 @@ const createRecord = async (data) => {
         return res.data;
     } catch (error) {
         console.error("Error creating record:", error);
-        throw error; 
+        throw error;
     }
 };
 

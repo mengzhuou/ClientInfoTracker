@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 
 const recordSchema = new mongoose.Schema({
     //company, name, hobby, importantDate, note, additionalNote, family, birthday, reasonOfKnowing, email, position, phoneNumber
-    company: {
+    name: {
         type: String,
         required: true
     },
-    name: {
+    company: {
         type: String,
         required: true
     },
@@ -22,19 +22,15 @@ const recordSchema = new mongoose.Schema({
         type: String,
         required: false
     },
-    additionalNote: {
+    familySituation: {
         type: String,
         required: false
     },
-    family: {
+    birthday: {
         type: String,
         required: false
     },
     reasonOfKnowing: {
-        type: String,
-        required: false
-    },
-    email: {
         type: String,
         required: false
     },
@@ -45,7 +41,15 @@ const recordSchema = new mongoose.Schema({
     phoneNumber: {
         type: Number,
         required: false
-    }
-})
+    },
+    email: {
+        type: String,
+        required: false
+    },
+    additionalNote: {
+        type: String,
+        required: false
+    },
+});
 
 module.exports = mongoose.model('Record', recordSchema)
