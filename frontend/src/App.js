@@ -13,10 +13,11 @@ class App extends Component {
         <Routes>
           <Route path="/" element={<Main/>} />
           <Route path="/draft" element={<DraftPage />} />
+          <Route path="/create-client" element={<CreateClient />} />
         </Routes>
       </Router>
     );
-    
+
   }
 }
 
