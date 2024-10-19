@@ -106,7 +106,7 @@ const CreateClient = () => {
                     dateFormat="yyyy/MM/dd"
                     selected={importantDate}
                     type="text"
-                    placeholderText="Important Date: YYYY/MM/DD"
+                    placeholderText="Important Date"
                     onChange={(date) => setImportantDate(date)}
                     portalId="root-portal" // keeps the calendar fixed
                     />

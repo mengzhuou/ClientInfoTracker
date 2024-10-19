@@ -27,6 +27,7 @@ class RecordTable extends Component {
     loadRecords = async () => {
         try {
             const records = await getRecords();
+            console.log("records: ", records)
             this.setState({ records });
         } catch (error) {
             console.error("Error loading records:", error);
