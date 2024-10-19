@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import CreateClient from "./components/Pages/CreateClient";
 import Main from "./components/Pages/MainPage/MainPage";
 import TopNavBar from "./components/Functions/TopNavBar/TopNavBar";
-
-
+import DraftPage from './components/Pages/DraftPage/DraftPage';
 class App extends Component {
 
   render() {
@@ -13,10 +12,11 @@ class App extends Component {
         <TopNavBar/>
         <Routes>
           <Route path="/" element={<Main/>} />
-          <Route path="/create-client" element={<CreateClient />} />
+          <Route path="/draft" element={<DraftPage />} />
         </Routes>
       </Router>
     );
+    
   }
 }
 
