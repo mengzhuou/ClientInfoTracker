@@ -76,7 +76,7 @@ class TopNavBar extends Component {
                     </div>
                     {this.state.isDroppedDown ? (
                     <ul ref={this.menuRef} className={`dropdown-container ${this.state.animationClass}`}>
-                        <li><NavButton className={`dropdown-content ${this.state.isDroppedDown ? "show" : ""}`} path="/draft" text="Draft" /></li>
+                        <li><NavButton className="dropdown-content" path="/draft" text="Draft" /></li>
                         <li><NavButton className="dropdown-content" path="/client" text="Create Client" /></li>
                         <li><NavButton className="dropdown-content" path="/export" text="Export" /></li>
                     </ul>

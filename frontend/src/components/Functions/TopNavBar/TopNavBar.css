@@ -91,7 +91,7 @@
     width: auto;
     height: auto;
     align-items: stretch;
-    border-radius: 10%;
+    border-radius: 10px;
     border: 2px solid black;
     overflow: hidden;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
@@ -108,14 +108,16 @@
 
 .dropdown-content {
     font-family: "Tiro Devanagari Hindi";
-    font-size: 21px;
+    font-size: 25px;
     padding: 5px 5px 5px 5px;
     color: #FFFFFF;
     text-align: center;
     cursor: pointer;
     width: 100%;
-    border-style: none none none none;
-    background-color: rgb(122, 122, 122);  
+    border-style: none none solid none;
+    border-color: #000000;
+    border-width: 0 0 2px 0;
+    background-color: rgb(122, 122, 122);
     transition-duration: 0.4s;
     &:hover {
         background-color: rgb(61, 61, 61);
@@ -123,11 +125,10 @@
     &:active {
         transition-duration: 0.1s;
         background-color: rgb(30, 30, 30);
-        border-style: none none none none;
     }
 }
 
-.dropdown-content:last-child {
+.dropdown-container li:last-child .dropdown-content {
     border-bottom: none;
 }
 
