@@ -28,7 +28,7 @@ class TopNavBar extends Component {
                     <ul className="nav-list">
                         <li><NavButton path="/draft" text="Draft" /></li>
                         <li><NavButton path="/client" text="Create Client" /></li>
-                        <li><ExportButton BACKEND_URL={process.env.REACT_APP_BACKEND_URL} /></li>
+                        <li><ExportButton /></li>
                         </ul>
                 </div>
             </div>
