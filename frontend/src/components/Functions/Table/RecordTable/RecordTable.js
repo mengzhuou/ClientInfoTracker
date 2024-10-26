@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import './RecordTable.css';
 import { getRecords } from '../../../../connector.js';
 import AgGridTable from '../AgGridTable/AgGridTable.js';
+
 class RecordTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            records: [],
             columnDefs: [
                 { headerName: "Name", field: "name", sortable: true, width: 160 },
                 { headerName: "Company", field: "company", sortable: true, width: 180 },
@@ -27,7 +27,8 @@ class RecordTable extends Component {
     loadRecords = async () => {
         try {
             const records = await getRecords();
-            this.setState({ records });
+            // Set records in a different place if necessary (for other features)
+            // this.setState({ records });
         } catch (error) {
             console.error("Error loading records:", error);
         }
@@ -42,11 +43,13 @@ class RecordTable extends Component {
     }
 
     render() {
+        const { rowData } = this.props; // Use rowData from props
+
         return (
             <div className="body">
                 <div className="RecordPageContainer">
                     <AgGridTable
-                        rowData={this.state.records}
+                        rowData={rowData} // Use the passed rowData
                         columnDefs={this.state.columnDefs}
                         defaultColDef={this.state.defaultColDef}
                         domLayout={this.state.domLayout}
