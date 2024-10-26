@@ -1,29 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import DraftButton from '../../Button/DraftButton/DraftButton';
+import { getDrafts } from '../../../connector.js';
 import './DraftList.css';
 
 const DraftList = ({ openDeletePopup }) => {
     const [drafts, setDrafts] = useState([]);
 
     useEffect(() => {
-        const fetchDrafts = async () => {
+        const loadDrafts = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/records/drafts`);
-                setDrafts(response.data);
+                const data = await getDrafts();
+                const sortedDrafts = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                setDrafts(sortedDrafts);
             } catch (error) {
-                console.error('Error fetching drafts:', error);
+                console.error('Error loading drafts:', error);
             }
         };
 
-        fetchDrafts();
+        loadDrafts();
     }, []);
 
     return (
         <div className="draft-list">
-            {drafts.map((draft) => (
-                <DraftButton key={draft._id} draft={draft} openDeletePopup={openDeletePopup} />
-            ))}
+            {drafts.length === 0 ? (
+                <div className="nodraft-message">No drafts available.</div>
+            ) : (
+                drafts.map((draft) => (
+                    <DraftButton key={draft._id} draft={draft} openDeletePopup={openDeletePopup} />
+                ))
+            )}
         </div>
     );
 };

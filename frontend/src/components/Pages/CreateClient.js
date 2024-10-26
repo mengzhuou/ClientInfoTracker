@@ -3,6 +3,7 @@ import './CreateClient.css';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import { createRecord } from '../../connector';
 
 const CreateClient = () => {
     // allows me to push users back to the home page after submission
@@ -22,6 +23,41 @@ const CreateClient = () => {
     const [email, setEmail] = useState('');
     const [additionalNote, setAdditionalNode] = useState('');
 
+    // Function to handle saving as a draft
+    const handleSaveDraft = async (e) => {
+        if (!(name === "" || hobby === "" || company === "")) {
+            try {
+                e.preventDefault();
+                const draftDetails = {
+                    name,
+                    company,
+                    hobby,
+                    importantDate: importantDate ? importantDate.toISOString() : null,
+                    note,
+                    familySituation,
+                    birthday: birthday ? birthday.toISOString() : null,
+                    reasonOfKnowing,
+                    position,
+                    phoneNumber,
+                    email,
+                    additionalNote,
+                    draftStatus: true // Setting draft status to true
+                };
+                await createRecord(draftDetails);
+                console.log('Draft saved successfully');
+                
+                navigate('/draft'); // Navigate to drafts page after saving
+
+                setName(''); setCompany(''); setHobby(''); setImportantDate('');
+                setNote(''); setFamilySituation(''); setBirthday('');
+                setReasonOfKnowing(''); setPosition(''); setPhoneNumber('');
+                setEmail(''); setAdditionalNode('');
+            } catch (error) {
+                console.error('Error saving draft:', error);
+            }
+        }
+    };
+
     // upon submission, post data to backend, clear fields, send to home page
     const handleSubmit = async (e) => {
         if (!(name === "" || hobby === "" || company === "")) {
@@ -29,21 +65,10 @@ const CreateClient = () => {
                 e.preventDefault(); // prevents refreshing and losing data
 
                 const clientDetails = { name, company, hobby, importantDate: importantDate ? importantDate.toISOString(): null, note, familySituation, birthday: birthday ? birthday.toISOString(): null,
-                    reasonOfKnowing, position, phoneNumber, email, additionalNote
+                    reasonOfKnowing, position, phoneNumber, email, additionalNote, draftStatus: false
                 }
                 console.log(clientDetails);
-
-                const response = await fetch('http://localhost:3500/records', {
-                    method: 'POST',
-                    headers: { "Content-Type": "application/json"},
-                    body: JSON.stringify(clientDetails)
-                })
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || 'Something went wrong');
-                }
-
+                await createRecord(clientDetails);
                 console.log('new client added');
                 navigate('/'); // redirects to home page
 
@@ -175,7 +200,7 @@ const CreateClient = () => {
                     />
                 </div>
                 <div className='bottom-buttons'>
-                <button className='save-draft'>Save Draft</button>
+                <button type="submit" onClick={handleSaveDraft} className='save-draft'>Save Draft</button>
                 <button type="submit" onClick={handleSubmit} className='submit'>Submit</button>
                 </div>
             </form>

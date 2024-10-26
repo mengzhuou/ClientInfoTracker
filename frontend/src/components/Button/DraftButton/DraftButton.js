@@ -12,6 +12,7 @@ const formatDate = (dateString) => {
     return `${month}-${day} ${hours}:${minutes}`;
 };
 
+// These are draft rows
 const DraftButton = ({ draft, openDeletePopup }) => {
     return (
         <div className="draft-button">
@@ -20,7 +21,6 @@ const DraftButton = ({ draft, openDeletePopup }) => {
                 {formatDate(draft.createdAt)}
             </span>
             <span className="trash-icon" onClick={(e) => {
-                e.stopPropagation();
                 openDeletePopup(draft._id);
             }}>
                 <FontAwesomeIcon icon={faTrashCan} />

@@ -4,6 +4,7 @@ import axios from 'axios';
 import DraftList from '../../Functions/Draft/DraftList';
 import DeletePopup from '../../Functions/PopupModals/DeletePopup/DeletePopup.js';
 import { withFuncProps } from '../../withFuncProps';
+import { deleteDraft } from '../../../connector';
 
 const DraftPage = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -17,7 +18,7 @@ const DraftPage = () => {
   const handleConfirmDelete = async () => {
     if (draftToDelete) {
       try {
-        await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/records/${draftToDelete}`);
+        await deleteDraft(draftToDelete);
         window.location.reload();
       } catch (error) {
         console.error('Error deleting draft:', error);
