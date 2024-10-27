@@ -11,7 +11,7 @@ class RecordTable extends Component {
                 { headerName: "Name", field: "name", sortable: true, width: 160 },
                 { headerName: "Company", field: "company", sortable: true, width: 180 },
                 { headerName: "Hobby", field: "hobby", sortable: true, width: 190 },
-                { headerName: "Important Event Date", field: "importantDate", sortable: true, width: 300, valueFormatter: this.dateFormatter },
+                { headerName: "Important Event Date", cellRenderer: this.importantDateFormatter, sortable: true, cellStyle: { 'white-space': 'pre' }, width: 300, wrapText: true, autoHeight:true },
                 { headerName: "Family", field: "familySituation", sortable: true, width: 300 }
             ],
             defaultColDef: { sortable: true, resizable: true },
@@ -22,6 +22,22 @@ class RecordTable extends Component {
 
     componentDidMount() {
         this.loadRecords();
+    }
+
+    //function for combine important date and note to show in one cell
+    importantDateFormatter = (params) => {
+        let date = params.data.importantDate;
+
+        if (!date) {
+            date = '';
+        } else {
+            const time = new Date(date);
+            date = time.toISOString().split('T')[0];
+        }
+        if (!params.data.note) {
+            params.data.note = '';
+        }
+        return date  + '\n' + params.data.note;
     }
 
     loadRecords = async () => {
@@ -35,6 +51,9 @@ class RecordTable extends Component {
     };
 
     dateFormatter = (params) => {
+        if (!params.value){
+            return '';
+        }
         const date = new Date(params.value);
         if (!isNaN(date)) {
             return date.toISOString().split('T')[0];
