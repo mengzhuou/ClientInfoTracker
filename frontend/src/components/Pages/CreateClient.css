@@ -164,4 +164,98 @@
 
 .note::placeholder {
     text-align: center;
+} 
+
+input, textarea {
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
+
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical; 
+}
+
+.container {
+    margin-top: 80px;
+    padding-left: 20px;
+    padding-right: 20px;
+    min-height: calc(100vh - 80px); 
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    overflow-y: auto;
+  }
+  
+  .card {
+    width: 30%;
+    margin: 10px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .container {
+      flex-direction: row; 
+      flex-wrap: wrap;
+      justify-content: center;
+      height: auto;
+      padding: 10px;
+    }
+  
+    .card {
+      width: 100%; 
+      margin-bottom: 15px;
+    }
+  
+    h1 {
+      font-size: 24px;
+    }
+  
+    p {
+      font-size: 16px;
+    }
+  }
+  @media only screen and (max-width: 430px) {
+    .container {
+      flex-direction: column;
+      height: auto;
+      overflow-y: auto;
+      padding: 60px;
+      margin-top: 80px;
+    }
+  
+    .card {
+      width: 100%;
+      margin: 15px;
+    }
+  
+    h1 {
+      font-size: 22px;
+    }
+  
+    p {
+      font-size: 16px;
+    }
+  }
+  html {
+    scroll-behavior: smooth;
+  }
