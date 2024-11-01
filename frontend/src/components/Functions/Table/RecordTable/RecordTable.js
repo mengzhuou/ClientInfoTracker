@@ -8,11 +8,11 @@ class RecordTable extends Component {
         this.state = {
             records: [],
             columnDefs: [
-                { headerName: "Name", field: "name", sortable: true, width: 160 },
-                { headerName: "Company", field: "company", sortable: true, width: 180 },
-                { headerName: "Hobby", field: "hobby", sortable: true, width: 190 },
-                { headerName: "Important Event Date", cellRenderer: this.importantDateFormatter, sortable: true, cellStyle: { 'white-space': 'pre' }, width: 300, wrapText: true, autoHeight:true },
-                { headerName: "Family", field: "familySituation", sortable: true, width: 300 }
+                { headerName: "Name", field: "name", sortable: true, flex: 1 },
+                { headerName: "Company", field: "company", sortable: true, flex: 1 },
+                { headerName: "Hobby", field: "hobby", sortable: true, flex: 1 },
+                { headerName: "Important Event Date", cellRenderer: this.importantDateFormatter, sortable: true, cellStyle: { 'white-space': 'pre' }, flex: 2, wrapText: true, autoHeight:true },
+                { headerName: "Family", field: "familySituation", sortable: true, flex: 1 }
             ],
             defaultColDef: { sortable: true, resizable: true },
             domLayout: 'autoHeight',
