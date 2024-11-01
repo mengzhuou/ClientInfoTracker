@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { withFuncProps } from "../../withFuncProps";
-import RecordTable from "../../Functions/Table/RecordTable/RecordTable"; // Correct path to RecordTable
+import RecordTable from "../../Functions/Table/RecordTable/RecordTable";
 import ClientSearch from "../../ClientSearch";
 import './MainPage.css';
 import { getRecords } from "../../../connector.js";
-
-
 
 class MainPage extends Component {
    constructor(props) {
@@ -16,11 +14,9 @@ class MainPage extends Component {
        };
    }
 
-
    componentDidMount() {
        this.loadRecords();
    }
-
 
    loadRecords = async () => {
        try {
@@ -31,32 +27,23 @@ class MainPage extends Component {
        }
    };
 
-
    handleSearch = (searchTerm) => {
-        console.log("Search Term:", searchTerm);
        this.setState({ searchTerm });
    };
 
-
    getFilteredData = () => {
        const { searchTerm, records } = this.state;
-       if (!searchTerm) return records; // Return all records if no search term
+       if (!searchTerm) return records;
        return records.filter(item =>
            (item.company || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
            (item.type || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
            (item.jobTitle || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
-           (item.date || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
-           (item.receivedInterview || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
-           (item.websiteLink || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
-           (item.comment || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
-           (item.click || "").toLowerCase().includes(searchTerm.toLowerCase())
+           (item.name || "").toLowerCase().includes(searchTerm.toLowerCase())
        );
    };
 
-
    render() {
-       const filteredData = this.getFilteredData(); // Get filtered data based on search term
-
+       const filteredData = this.getFilteredData();
 
        return (
            <div className="main-page-body">
@@ -72,6 +59,5 @@ class MainPage extends Component {
        );
    }
 }
-
 
 export default withFuncProps(MainPage);
