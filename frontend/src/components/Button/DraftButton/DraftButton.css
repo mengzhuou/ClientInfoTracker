@@ -13,6 +13,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .draft-button:hover {
@@ -20,6 +21,7 @@
 }
 
 .draft-name {
+    flex: 1;
     position: absolute;
     left: 20px;
     color: #000;
@@ -27,6 +29,9 @@
     font-size: clamp(30px, 5vw, 40px);
     font-weight: 400;
     white-space: nowrap;
+    max-width: calc(60% - 60px);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .draft-date {
@@ -37,7 +42,7 @@
     font-size: clamp(30px, 5vw, 40px);
     font-weight: 400;
     white-space: nowrap;
-    text-align: center;
+    text-align: right;
 }
 
 .trash-icon {
@@ -50,4 +55,19 @@
 
 .trash-icon:hover {
     color: #c82333;
+}
+
+/* Stack elements vertically on smaller screens */
+@media (max-width: 768px) {
+
+    .draft-name {
+        top: 10px;
+        max-width: 80%;
+    }
+    .draft-date {
+        left: 20px;
+        bottom: 10px;
+        text-align: left;
+    }
+
 }
