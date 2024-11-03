@@ -45,13 +45,8 @@ const CreateClient = () => {
                 };
                 await createRecord(draftDetails);
                 console.log('Draft saved successfully');
-                
+                resetFields();
                 navigate('/draft'); // Navigate to drafts page after saving
-
-                setName(''); setCompany(''); setHobby(''); setImportantDate('');
-                setNote(''); setFamilySituation(''); setBirthday('');
-                setReasonOfKnowing(''); setPosition(''); setPhoneNumber('');
-                setEmail(''); setAdditionalNode('');
             } catch (error) {
                 console.error('Error saving draft:', error);
             }
@@ -70,27 +65,21 @@ const CreateClient = () => {
                 console.log(clientDetails);
                 await createRecord(clientDetails);
                 console.log('new client added');
+                resetFields();
                 navigate('/'); // redirects to home page
-
-                // removes all fields
-                setName('');
-                setCompany('');
-                setHobby('');
-                setImportantDate('');
-                setNote('');
-                setFamilySituation('');
-                setBirthday('');
-                setReasonOfKnowing('');
-                setPosition('');
-                setPhoneNumber('');
-                setEmail('');
-                setAdditionalNode('');
-
             } catch (error) {
                 console.error('Error adding client: ', error);
             }
         }
     }
+
+    // removes all fields
+    const resetFields = () => {
+        setName(''); setCompany(''); setHobby(''); setImportantDate('');
+        setNote(''); setFamilySituation(''); setBirthday('');
+        setReasonOfKnowing(''); setPosition(''); setPhoneNumber('');
+        setEmail(''); setAdditionalNode('');
+    };
 
     // HTML
     return (
