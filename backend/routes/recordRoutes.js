@@ -5,5 +5,7 @@ const limiter = require('../middleware/rateLimiter');
 
 router.get('/', limiter, recordController.getRecords);
 router.post('/', limiter, recordController.createRecord);
+router.get('/drafts', limiter, recordController.getDrafts);
+router.delete('/:id', limiter, recordController.deleteRecord);
 
 module.exports = router;
