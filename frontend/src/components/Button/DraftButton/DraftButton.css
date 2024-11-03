@@ -26,7 +26,7 @@
     left: 20px;
     color: #000;
     font-family: 'Montserrat';
-    font-size: clamp(30px, 5vw, 40px);
+    font-size: clamp(20px, 5vw, 30px);
     font-weight: 400;
     white-space: nowrap;
     max-width: calc(60% - 60px);
@@ -39,7 +39,7 @@
     right: 20%;
     color: #9C9C9C;
     font-family: "Montserrat";
-    font-size: clamp(30px, 5vw, 40px);
+    font-size: clamp(20px, 5vw, 30px);
     font-weight: 400;
     white-space: nowrap;
     text-align: right;
@@ -48,7 +48,7 @@
 .trash-icon {
     position: absolute;
     right: 20px;
-    font-size: clamp(30px, 5vw, 40px);
+    font-size: clamp(20px, 5vw, 30px);
     cursor: pointer;
     color: #000;
 }

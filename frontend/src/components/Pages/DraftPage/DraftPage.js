@@ -35,7 +35,7 @@ const DraftPage = () => {
   return (
     <div className="draft-page-body">
       <div className="draft-page-container">
-        <h1 className="draft-inbox-header">Draft Inbox</h1>
+        <p className="draft-inbox-header">Draft Inbox</p>
         <DraftList openDeletePopup={openDeletePopup} />
       </div>
       {isPopupOpen && (
