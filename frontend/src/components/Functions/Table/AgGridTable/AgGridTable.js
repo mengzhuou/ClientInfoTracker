@@ -14,7 +14,7 @@ const AgGridTable = ({ rowData, columnDefs, defaultColDef, domLayout, suppressHo
                 domLayout={domLayout}
                 suppressHorizontalScroll={suppressHorizontalScroll}
                 pagination={true}         
-                paginationPageSize={10}  
+                paginationPageSize={5}  
             />
         </div>
     </div>
