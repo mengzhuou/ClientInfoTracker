@@ -63,11 +63,17 @@
     .draft-name {
         top: 10px;
         max-width: 80%;
+        white-space: normal;
+        word-wrap: break-word;
+        overflow: visible;
     }
     .draft-date {
         left: 20px;
         bottom: 10px;
         text-align: left;
+    }
+    .trash-icon {
+        bottom: 10px;
     }
 
 }
