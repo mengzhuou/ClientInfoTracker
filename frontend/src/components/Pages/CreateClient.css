@@ -12,7 +12,6 @@
 }
 
 .label-input-group input {
-    width: 100%; 
     padding: 10px;
     border: 1px solid #938f8f;
     border-radius: 4px;
@@ -49,7 +48,10 @@ label {
 
 .form-row2 {
     text-align: center;
-    padding-top: 30px;
+    display: flex;
+    padding-top: 8px;
+    gap: 20px;
+    justify-content:center;
 }
 .date-important {
     padding: 10px;
@@ -59,22 +61,28 @@ label {
 
 .form-row3 {
     text-align: center;
-    padding-top: 30px;
+    display: flex;
+    gap: 20px;
+    padding-top: 8px;
 }
 
 .form-row4 {
     text-align: center;
-    padding-top: 30px;
+    display: flex;
+    gap: 20px;
+    padding-top: 8px;
 }
 
 .form-row5 {
     text-align: center;
-    padding-top: 30px;
+    padding-top: 8px;
+    display: flex;
+    justify-content:center;
 }
 
 .bottom-buttons {
     text-align: center;
-    padding-top: 30px;
+    padding-top: 8px;
 }
 
 .additional-note {
