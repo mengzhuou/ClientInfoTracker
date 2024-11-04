@@ -89,30 +89,39 @@ const CreateClient = () => {
             </div>
             <form>
                 <div className='form-row1'>
-                    <input
-                    className='name'
-                    type="text"
-                    required
-                    placeholder='Name'
-                    value = {name}
-                    onChange={(e) => setName(e.target.value)}
-                    />
-                    <input
-                    className='company'
-                    type="text"
-                    required
-                    placeholder='Company'
-                    value = {company}
-                    onChange={(e) => setCompany(e.target.value)}
-                    />
-                    <input
-                    className='hobby'
-                    type="text"
-                    required
-                    placeholder='Hobby'
-                    value= {hobby}
-                    onChange={(e) => setHobby(e.target.value)}
-                    />
+                    <div className='label-input-group'>
+                        <label>Name</label>
+                        <input
+                            className='name'
+                            type="text"
+                            required
+                            placeholder='Name'
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <div className='label-input-group'>
+                        <label>Company</label>
+                        <input
+                            className='company'
+                            type="text"
+                            required
+                            placeholder='Company'
+                            value={company}
+                            onChange={(e) => setCompany(e.target.value)}
+                        />
+                    </div>
+                    <div className='label-input-group'>
+                        <label>Hobby</label>
+                        <input
+                            className='hobby'
+                            type="text"
+                            required
+                            placeholder='Hobby'
+                            value={hobby}
+                            onChange={(e) => setHobby(e.target.value)}
+                        />
+                    </div>
                 </div>
                 <div className='form-row2'>
                     <DatePicker
