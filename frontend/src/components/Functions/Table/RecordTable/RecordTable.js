@@ -28,12 +28,12 @@ class RecordTable extends Component {
     }
 
     render() {
-        const { rowData } = this.props; // Use rowData from props
+        const { rowData } = this.props; 
         return (
             <div className="body">
                 <div className="RecordPageContainer">
                     <AgGridTable
-                        rowData={rowData} // Use the passed rowData
+                        rowData={rowData} 
                         columnDefs={this.state.columnDefs}
                         defaultColDef={this.state.defaultColDef}
                         domLayout={this.state.domLayout}

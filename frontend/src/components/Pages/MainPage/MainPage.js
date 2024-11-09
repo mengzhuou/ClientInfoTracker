@@ -9,8 +9,8 @@ class MainPage extends Component {
    constructor(props) {
        super(props);
        this.state = {
-           records: [], // Full list of records
-           searchTerm: '' // Current search term
+           records: [], 
+           searchTerm: '' 
        };
    }
 
@@ -52,7 +52,7 @@ class MainPage extends Component {
                        <ClientSearch onSearch={this.handleSearch} />
                    </div>
                    <div className="record-table-section">
-                       <RecordTable rowData={filteredData} /> {/* Pass filtered data */}
+                       <RecordTable rowData={filteredData} /> {}
                    </div>
                </div>
            </div>

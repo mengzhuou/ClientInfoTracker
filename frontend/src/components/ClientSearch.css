@@ -111,3 +111,20 @@
         font-size: 18px; /* Adjust size as needed */
     }
 }
+
+@media (max-width: 1024px) {
+    .search-container {
+        width: 42%; /* Make the container wider for tablet-sized screens */
+        max-width: 700px;
+    }
+
+    .search-input {
+        font-size: 22px; /* Adjust font size for tablet */
+        padding: 5px 12px;
+    }
+
+    .search-icon {
+        right: 15px;
+        font-size: 20px; /* Adjust icon size for tablet */
+    }
+}
