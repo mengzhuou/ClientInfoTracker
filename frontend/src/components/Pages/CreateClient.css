@@ -1,7 +1,13 @@
 .title {
-    font-size: medium;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: sans-serif;
+    letter-spacing: 2px;
+    white-space: nowrap;
     text-align: center;
+    color: #000000;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    -webkit-text-stroke-width: clamp(1px, 0.3vw, 2px);
+    font-size: clamp(35px, 3vw, 45px);
+    font-style: normal;
 }
 
 .label-input-group {
@@ -27,10 +33,34 @@
     color: #333;
 }
 
+.create-client-page-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin-top: 100px;
+    width: 100vw;
+}
+
 
 .create-client-container {
-    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
 }
+
+.form-scrollable {
+    max-height: 80vh;
+    overflow: auto;
+    padding-bottom: 20px; 
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; 
+}
+
 
 label {
     display: block;
@@ -94,10 +124,7 @@ label {
 }
 
 .save-draft, .submit {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #e5e7eb;
+    background-color: #CB997E;
     border: none;
     border-radius: 8px;
     padding: 10px 20px;
@@ -106,17 +133,11 @@ label {
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.2s ease-in-out;
-    min-width: 130px;
+    min-width: 100px;
 }
 
 .save-draft:hover, .submit:hover {
     background-color: #d1d5db;
-}
-
-.save-draft::after, .submit::after {
-    content: '>';
-    font-size: 18px;
-    color: gray;
 }
 
 .save-draft {

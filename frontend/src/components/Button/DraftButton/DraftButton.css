@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     width: 100%;
-    min-height: 50px;
+    min-height: 25px;
     min-width: 40vw;
     background: #FFF;
     padding: 30px 10px;
@@ -62,9 +62,8 @@
     .draft-name {
         top: 10px;
         max-width: 80%;
-        white-space: normal;
         word-wrap: break-word;
-        overflow: visible;
+        white-space: nowrap;
     }
     .draft-date {
         left: 20px;
@@ -73,6 +72,10 @@
     }
     .trash-icon {
         bottom: 10px;
+    }
+
+    .draft-button {
+        min-height: 40px;
     }
 
 }

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import './RecordTable.css';
-import { getRecords } from '../../../../connector.js';
 import AgGridTable from '../AgGridTable/AgGridTable.js';
+import { getRecords } from '../../../../connector.js';
+
 class RecordTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            records: [],
             columnDefs: [
                 { headerName: "Name", field: "name", sortable: true, flex: 1 },
                 { headerName: "Company", field: "company", sortable: true, flex: 1 },
@@ -19,7 +19,6 @@ class RecordTable extends Component {
             suppressHorizontalScroll: true
         };
     }
-
     componentDidMount() {
         this.loadRecords();
     }
@@ -63,11 +62,12 @@ class RecordTable extends Component {
     }
 
     render() {
+        const { rowData } = this.props; 
         return (
             <div className="body">
                 <div className="RecordPageContainer">
                     <AgGridTable
-                        rowData={this.state.records}
+                        rowData={rowData} 
                         columnDefs={this.state.columnDefs}
                         defaultColDef={this.state.defaultColDef}
                         domLayout={this.state.domLayout}
