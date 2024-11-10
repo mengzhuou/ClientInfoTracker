@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import './RecordTable.css';
 import AgGridTable from '../AgGridTable/AgGridTable.js';
+import { getRecords } from '../../../../connector.js';
 
 class RecordTable extends Component {
     constructor(props) {
