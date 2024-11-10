@@ -41,8 +41,28 @@ const createRecord = async (data) => {
     }
 };
 
+const getDrafts = async () => {
+    try {
+        const res = await axios.get(`${BACKEND_URL}/records/drafts`);
+        return res.data;
+    } catch (error) {
+        console.error('Error fetching drafts:', error);
+        throw error;
+    }
+};
+
+const deleteDraft = async (draftId) => {
+    try {
+        await axios.delete(`${BACKEND_URL}/records/${draftId}`);
+    } catch (error) {
+        console.error('Error deleting draft:', error);
+        throw error;
+    }
+};
 
 export {
     getRecords,
     createRecord,
+    getDrafts,
+    deleteDraft,
 };

@@ -3,6 +3,7 @@ import './CreateClient.css';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import { createRecord } from '../../connector';
 
 const CreateClient = () => {
     // allows me to push users back to the home page after submission
@@ -22,6 +23,36 @@ const CreateClient = () => {
     const [email, setEmail] = useState('');
     const [additionalNote, setAdditionalNode] = useState('');
 
+    // Function to handle saving as a draft
+    const handleSaveDraft = async (e) => {
+        if (!(name === "" || hobby === "" || company === "")) {
+            try {
+                e.preventDefault();
+                const draftDetails = {
+                    name,
+                    company,
+                    hobby,
+                    importantDate: importantDate ? importantDate.toISOString() : null,
+                    note,
+                    familySituation,
+                    birthday: birthday ? birthday.toISOString() : null,
+                    reasonOfKnowing,
+                    position,
+                    phoneNumber,
+                    email,
+                    additionalNote,
+                    draftStatus: true // Setting draft status to true
+                };
+                await createRecord(draftDetails);
+                console.log('Draft saved successfully');
+                resetFields();
+                navigate('/draft'); // Navigate to drafts page after saving
+            } catch (error) {
+                console.error('Error saving draft:', error);
+            }
+        }
+    };
+
     // upon submission, post data to backend, clear fields, send to home page
     const handleSubmit = async (e) => {
         if (!(name === "" || hobby === "" || company === "")) {
@@ -29,43 +60,26 @@ const CreateClient = () => {
                 e.preventDefault(); // prevents refreshing and losing data
 
                 const clientDetails = { name, company, hobby, importantDate: importantDate ? importantDate.toISOString(): null, note, familySituation, birthday: birthday ? birthday.toISOString(): null,
-                    reasonOfKnowing, position, phoneNumber, email, additionalNote
+                    reasonOfKnowing, position, phoneNumber, email, additionalNote, draftStatus: false
                 }
                 console.log(clientDetails);
-
-                const response = await fetch('http://localhost:3500/records', {
-                    method: 'POST',
-                    headers: { "Content-Type": "application/json"},
-                    body: JSON.stringify(clientDetails)
-                })
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.message || 'Something went wrong');
-                }
-
+                await createRecord(clientDetails);
                 console.log('new client added');
+                resetFields();
                 navigate('/'); // redirects to home page
-
-                // removes all fields
-                setName('');
-                setCompany('');
-                setHobby('');
-                setImportantDate('');
-                setNote('');
-                setFamilySituation('');
-                setBirthday('');
-                setReasonOfKnowing('');
-                setPosition('');
-                setPhoneNumber('');
-                setEmail('');
-                setAdditionalNode('');
-
             } catch (error) {
                 console.error('Error adding client: ', error);
             }
         }
     }
+
+    // removes all fields
+    const resetFields = () => {
+        setName(''); setCompany(''); setHobby(''); setImportantDate('');
+        setNote(''); setFamilySituation(''); setBirthday('');
+        setReasonOfKnowing(''); setPosition(''); setPhoneNumber('');
+        setEmail(''); setAdditionalNode('');
+    };
 
     // HTML
     return (
@@ -75,107 +89,135 @@ const CreateClient = () => {
             </div>
             <form>
                 <div className='form-row1'>
-                    <input
-                    className='name'
-                    type="text"
-                    required
-                    placeholder='Name'
-                    value = {name}
-                    onChange={(e) => setName(e.target.value)}
-                    />
-                    <input
-                    className='company'
-                    type="text"
-                    required
-                    placeholder='Company'
-                    value = {company}
-                    onChange={(e) => setCompany(e.target.value)}
-                    />
-                    <input
-                    className='hobby'
-                    type="text"
-                    required
-                    placeholder='Hobby'
-                    value= {hobby}
-                    onChange={(e) => setHobby(e.target.value)}
-                    />
+                    <div className='label-input-group'>
+                        <label>Name</label>
+                        <input
+                            className='name'
+                            type="text"
+                            required
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <div className='label-input-group'>
+                        <label>Company</label>
+                        <input
+                            className='company'
+                            type="text"
+                            required
+                            value={company}
+                            onChange={(e) => setCompany(e.target.value)}
+                        />
+                    </div>
+                    <div className='label-input-group'>
+                        <label>Hobby</label>
+                        <input
+                            className='hobby'
+                            type="text"
+                            required
+                            value={hobby}
+                            onChange={(e) => setHobby(e.target.value)}
+                        />
+                    </div>
                 </div>
                 <div className='form-row2'>
-                    <DatePicker
-                    className="date-important"
-                    dateFormat="yyyy/MM/dd"
-                    selected={importantDate}
-                    type="text"
-                    placeholderText="Important Date"
-                    onChange={(date) => setImportantDate(date)}
-                    portalId="root-portal" // keeps the calendar fixed
-                    />
-                    <input
-                    className='note'
-                    type="text"
-                    placeholder='Note'
-                    value = {note}
-                    onChange={(e) => setNote(e.target.value)}
-                    />
+                    <div className='label-input-group'>
+                        <label>Important Date</label>
+                        <DatePicker
+                            className="date-important"
+                            dateFormat="yyyy/MM/dd"
+                            selected={importantDate}
+                            type="text"
+                            onChange={(date) => setImportantDate(date)}
+                            placeholderText='YYYY/MM/DD'
+                            portalId="root-portal" // keeps the calendar fixed
+                        />
+
+                    </div>
+                    <div className='label-input-group'>
+                        <label>Note</label>
+                        <input
+                            className='note'
+                            type="text"
+                            value={note}
+                            onChange={(e) => setNote(e.target.value)}
+                        />
+                    </div>
                 </div>
                 <div className='form-row3'>
-                    <input
-                    className='family-situation'
-                    type="text"
-                    placeholder='Family Situation'
-                    value = {familySituation}
-                    onChange = {(e) => setFamilySituation(e.target.value)}
-                    />
-                    <DatePicker
-                    className='birthday'
-                    selected = {birthday}
-                    dateFormat="yyyy/MM/dd"
-                    type="text"
-                    placeholderText='Birthday: YYYY/MM/DD'
-                    onChange={(date) => setBirthday(date)}
-                    portalId="root-portal"
-                    />
-                    <input
-                    className="reason-of-knowing"
-                    type="text"
-                    placeholder='Reason of Knowing'
-                    value = {reasonOfKnowing}
-                    onChange={(e) => setReasonOfKnowing(e.target.value)}
-                    />
+                    <div className='label-input-group'>
+                        <label>Family Situation</label>
+                        <input
+                            className='family-situation'
+                            type="text"
+                            value={familySituation}
+                            onChange={(e) => setFamilySituation(e.target.value)}
+                        />
+                    </div>
+                    <div className='label-input-group'>
+                        <label>Birthday</label>
+                        <DatePicker
+                            className='birthday'
+                            selected={birthday}
+                            dateFormat="yyyy/MM/dd"
+                            onChange={(date) => setBirthday(date)}
+                            placeholderText='YYYY/MM/DD'
+                            portalId="root-portal"
+                        />
+                    </div>
+                    <div className='label-input-group'>
+                        <label>Reason of Knowing</label>
+                        <input
+                            className='reason-of-knowing'
+                            type="text"
+                            value={reasonOfKnowing}
+                            onChange={(e) => setReasonOfKnowing(e.target.value)}
+                        />
+                    </div>
                 </div>
+
                 <div className='form-row4'>
-                    <input
-                    className='position'
-                    type="text"
-                    placeholder='Position'
-                    value={position}
-                    onChange={(e) => setPosition(e.target.value)}
-                    />
-                    <input
-                    className='phone-number'
-                    type="text"
-                    placeholder='Phone Number'
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    />
-                    <input
-                    className='email'
-                    type="text"
-                    placeholder='Email'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    />
+                    <div className='label-input-group'>
+                        <label>Position</label>
+                        <input
+                            className='position'
+                            type="text"
+                            value={position}
+                            onChange={(e) => setPosition(e.target.value)}
+                        />
+                    </div>
+                    <div className='label-input-group'>
+                        <label>Phone Number</label>
+                        <input
+                            className='phone-number'
+                            type="text"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                        />
+                    </div>
+                    <div className='label-input-group'>
+                        <label>Email</label>
+                        <input
+                            className='email'
+                            type="text"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
                 </div>
+
                 <div className='form-row5'>
-                    <textarea
-                        className='additional-note'
-                        placeholder='Additional Note'
-                        value={additionalNote}
-                        onChange={(e) => setAdditionalNode(e.target.value)}
-                    />
+                    <div className='label-input-group'>
+                        <label>Additional Note</label>
+                        <textarea
+                            className='additional-note'
+                            value={additionalNote}
+                            onChange={(e) => setAdditionalNode(e.target.value)}
+                        />
+                    </div>
                 </div>
                 <div className='bottom-buttons'>
-                <button className='save-draft'>Save Draft</button>
+                <button type="submit" onClick={handleSaveDraft} className='save-draft'>Save Draft</button>
                 <button type="submit" onClick={handleSubmit} className='submit'>Submit</button>
                 </div>
             </form>

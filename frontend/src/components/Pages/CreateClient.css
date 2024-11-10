@@ -1,18 +1,57 @@
 .title {
-    padding-top: 10px;
     font-size: medium;
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
 }
 
+.label-input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px; 
+}
+
+.label-input-group input {
+    padding: 10px;
+    border: 1px solid #938f8f;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    box-sizing: border-box;
+}
+
+.label-input-group label {
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+
+.create-client-container {
+    padding-top: 25px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 5px;
+    color: #333;
+}
+
 .form-row1 {
     text-align: center;
-    padding-top: 30px;
+    display: flex;
+    gap: 20px;
 }
 
 .form-row2 {
     text-align: center;
-    padding-top: 30px;
+    display: flex;
+    padding-top: 8px;
+    gap: 20px;
+    justify-content:center;
 }
 .date-important {
     padding: 10px;
@@ -22,22 +61,28 @@
 
 .form-row3 {
     text-align: center;
-    padding-top: 30px;
+    display: flex;
+    gap: 20px;
+    padding-top: 8px;
 }
 
 .form-row4 {
     text-align: center;
-    padding-top: 30px;
+    display: flex;
+    gap: 20px;
+    padding-top: 8px;
 }
 
 .form-row5 {
     text-align: center;
-    padding-top: 30px;
+    padding-top: 8px;
+    display: flex;
+    justify-content:center;
 }
 
 .bottom-buttons {
     text-align: center;
-    padding-top: 30px;
+    padding-top: 8px;
 }
 
 .additional-note {
