@@ -85,7 +85,7 @@ const CreateClient = () => {
         <div className='create-client-page-body'>
             <div className='create-client-container'>
                 <p className='title'>Create a New Client</p>
-                <form>
+                <form className='form-scrollable'>
                     <div className='form-row1'>
                         <div className='label-input-group'>
                             <label>Name</label>
@@ -215,8 +215,8 @@ const CreateClient = () => {
                         </div>
                     </div>
                     <div className='bottom-buttons'>
-                    <button type="submit" onClick={handleSaveDraft} className='save-draft'>Save Draft</button>
-                    <button type="submit" onClick={handleSubmit} className='submit'>Submit</button>
+                        <button type="submit" onClick={handleSaveDraft} className='save-draft'>Save Draft</button>
+                        <button type="submit" onClick={handleSubmit} className='submit'>Submit</button>
                     </div>
                 </form>
             </div>
