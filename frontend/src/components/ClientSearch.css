@@ -1,130 +1,30 @@
-.search-container {
-    padding: 10px;
-    margin-top: 30px; /* Search bar under header */
-    margin-left: 71px; /* Original left margin */
-    width: 43.5%; /* Set to a percentage based on the assumed parent width */
-    max-width: 435px; /* Ensure it does not exceed 435px */
-    height: 60px; /* Set height */
-}
-
 .search-bar {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 100%; /* Change to 100% for responsive layout */
-    height: 34px; /* Match frame height */
+    border: 2px solid #D2A37E;
+    border-radius: 4px;
+    background-color: #fff;
+    width: 250px;
 }
 
 .search-input {
-    border: 3px solid #CB997E; /* Match border color */
-    padding: 5px 15px; /* Adjusted padding for balance */
-    border-radius: 10px; /* Rounded corners */
-    font-family: 'Montagu Slab', serif; /* Set font */
-    font-weight: normal; /* Regular */
-    font-size: 28px; /* Adjusted font size for fitting */
-    line-height: 34px; /* Match line height to font size */
-    width: calc(100% - 40px); /* Adjust for padding and icon size */
-    height: 34px; /* Corrected height */
-    letter-spacing: 0%; 
-    transition: border-color 0.3s; /* Smooth transition for border color */
-    color: #A9A9A9; 
+    border: none;
+    padding: 8px 0 8px 8px;
+    outline: none;
+    font-size: 16px;
 }
 
-.search-input:focus {
-    outline: none; /* Remove default outline */
-    border-color: #A67B57; /* Change border color on focus */
-    box-shadow: 0 0 5px rgba(210, 163, 126, 0.5); /* Shadow for visibility */
+.search-input::placeholder {
+    color: #A9A9A9;
+    font-family: 'Montagu Slab', serif;;
+    font-weight: normal;
 }
 
-.search-icon {
-    position: absolute;
-    right: 10px; /* Adjust based on padding */
-    width: 25.44px; /* Match icon width */
-    height: 25.44px; /* Match icon height */
-    color: #D2A37E; /* Match border color */
-}
-
-.search-bar::before {
-    content: '\f002'; /* Font Awesome search icon */
-    font-family: 'Font Awesome 5 Free'; /* Use the correct font family */
-    font-weight: 900; /* Use the solid style */
-    position: absolute;
-    right: 15px; /* Position it as needed */
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust vertical alignment */
-    color: #D2A37E; /* Match border color */
-    font-size: 20px; /* Adjust size */
-}
-
-.client-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.client-table th, .client-table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-@media (max-width: 600px) {
-    .search-container {
-        margin-top: 30px; /* Keep the top margin */
-        margin-left: 0; /* Shift to the very left for mobile */
-        margin-right: 0; /* Remove right margin */
-        width: calc(100% - 20px); /* Full width minus some padding */
-        max-width: none; /* Remove max-width restriction */
-        height: 60px; /* Maintain height */
-    }
-    .search-bar {
-        width: 100%; /* Full width of the container */
-    }
-    .search-input {
-        font-size: 16px; /* Adjust font size for mobile */
-        padding: 5px 8px; /* Adjust padding for smaller appearance */
-        width: calc(100% - 40px); /* Full width of the container minus icon */
-        height: 100%; /* Match the height of the container */
-        border: 3px solid #CB997E; /* Ensure border matches */
-        border-radius: 10px; /* Keep rounded corners */
-    }
-
-    .search-icon {
-        position: absolute; /* Position the icon absolutely within the search bar */
-        right: 25px; /* Shift to the left */
-        top: 50%; /* Center vertically */
-        transform: translateY(-50%); /* Adjust vertical alignment */
-        font-size: 18px; /* Adjust icon size for mobile */
-        color: #D2A37E; /* Match icon color */
-        pointer-events: none; /* Allow clicks on the input field */
-    }
-
-    .search-bar::before {
-        content: '\f002'; /* Unicode for Font Awesome search icon */
-        font-family: 'Font Awesome 5 Free'; /* Use the correct font family */
-        font-weight: 900; /* Use the solid style */
-        position: absolute; /* Position it as needed */
-        right: 25px; /* Shift to the left */
-        top: 50%; /* Center vertically */
-        transform: translateY(-50%); /* Adjust vertical alignment */
-        color: #D2A37E; /* Match your border color */
-        font-size: 18px; /* Adjust size as needed */
-    }
-}
-
-@media (max-width: 1024px) {
-    .search-container {
-        width: 42%; /* Make the container wider for tablet-sized screens */
-        max-width: 700px;
-    }
-
-    .search-input {
-        font-size: 22px; /* Adjust font size for tablet */
-        padding: 5px 12px;
-    }
-
-    .search-icon {
-        right: 15px;
-        font-size: 20px; /* Adjust icon size for tablet */
-    }
+.search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    color: #D2A37E;
+    padding: 4px;
+    float: right;
+    margin: 5px;
 }

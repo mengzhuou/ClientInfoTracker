@@ -48,7 +48,7 @@ class MainPage extends Component {
        return (
            <div className="main-page-body">
                <div className="main-page-container">
-                   <div className="search-section">
+                   <div>
                        <ClientSearch onSearch={this.handleSearch} />
                    </div>
                    <div className="record-table-section">
