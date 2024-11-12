@@ -1,17 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './EnterCode.css'
+import { getAccessCodes } from '../../../connector.js';
 
 const EnterCode = () => {
   const [enterCode, setEnterCode] = useState('');
-  const navigate = useNavigate();
+  const [accessCodes, setAccessCodes] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
-  
-  const correctCode = '54321';
+  const navigate = useNavigate();
+
+  // Fetch access codes from the backend when the component mounts
+  useEffect(() => {
+    const fetchCodes = async () => {
+      try {
+        const codes = await getAccessCodes();
+        setAccessCodes(codes);
+      } catch (error) {
+        console.error('Error fetching access codes:', error);
+        setErrorMessage('Error fetching access codes');
+      }
+    };
+
+    fetchCodes();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (enterCode === correctCode) {
+
+    const isValidCode = accessCodes.some((codeObj) => codeObj.code === enterCode);
+
+    if (isValidCode) {
       navigate('/MainPage');
     } else {
       setErrorMessage('Please enter a valid code');
@@ -23,14 +41,14 @@ const EnterCode = () => {
         <div className="enter-page-container">
             <h2>Enter Code</h2>
             <form onSubmit={handleSubmit}>
-            <input
+              <input
                 type="password"
                 value={enterCode}
                 onChange={(e) => setEnterCode(e.target.value)}
                 placeholder="Access Code"
-            />
-            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            <button type="submit">Submit</button>
+              />
+              <p>{errorMessage}</p>
+              <button type="submit">Submit</button>
             </form>
         </div>
     </div>

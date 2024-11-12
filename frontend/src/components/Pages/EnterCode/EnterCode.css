@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #F2F2F1;
 }
   
 .enter-page-container {
@@ -11,23 +12,23 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 25%;
-  height: 22.5%;
-  background-color:#b5a18d34;
+  width: 480px;
+  height: 243px;
+  background-color:#E8E6E0;
 }
 
 form {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 80%;
 }
   
 input {
   padding: 10px;
   font-size: 16px;
-  width: 325px;
   border: none;
-  background-color: #c2bfbe6b;
+  background-color: #D9D9D9;
 }
 
 input:focus {
@@ -54,4 +55,10 @@ p {
   position: absolute;
   font-size: 13px;
   color: red;
+}
+
+@media (max-width: 600px) {
+  .enter-page-container {
+    width: 80%;
+  }
 }

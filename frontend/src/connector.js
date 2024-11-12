@@ -61,8 +61,18 @@ const createRecord = async (data) => {
     }
 };
 
+const getAccessCodes = async () => {
+    try {
+        const res = await axios.get(`${BACKEND_URL}/accesscodes`);
+        return res.data;
+    } catch (error) {
+        console.error("Error fetching records:", error);
+        throw error; 
+    }
+};
 
 export {
     getRecords,
     createRecord,
+    getAccessCodes,
 };
