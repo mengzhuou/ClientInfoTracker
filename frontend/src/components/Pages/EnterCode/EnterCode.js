@@ -47,8 +47,8 @@ const EnterCode = () => {
                 onChange={(e) => setEnterCode(e.target.value)}
                 placeholder="Access Code"
               />
-              <p>{errorMessage}</p>
-              <button type="submit">Submit</button>
+              <p className='enter-code-error'>{errorMessage}</p>
+              <button className='enter-code-button' type="submit">Submit</button>
             </form>
         </div>
     </div>

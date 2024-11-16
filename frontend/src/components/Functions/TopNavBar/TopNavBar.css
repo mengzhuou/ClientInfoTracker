@@ -131,6 +131,14 @@
     border-bottom: none;
 }
 
+.navBar-EnterCode {
+    padding-left: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 20px;
+    color: #787777;
+}
+
 @media (max-width: 768px) {
     .nav-list {
         display: none;

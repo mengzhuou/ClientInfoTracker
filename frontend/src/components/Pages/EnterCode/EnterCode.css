@@ -4,7 +4,6 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #F2F2F1;
 }
   
 .enter-page-container {
@@ -17,25 +16,25 @@
   background-color:#E8E6E0;
 }
 
-form {
+.enter-page-container form {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 80%;
 }
   
-input {
+.enter-page-container input {
   padding: 10px;
   font-size: 16px;
   border: none;
   background-color: #D9D9D9;
 }
 
-input:focus {
+.enter-page-container input:focus {
   outline: none;
 }
 
-button {
+.enter-code-button {
   border-radius: 25px;
   margin: 30px auto 10px auto;
   width: 100px;
@@ -46,11 +45,11 @@ button {
   cursor: pointer;
 }
   
-button:hover {
+.enter-code-button:hover {
   background-color: #b4866d;
 }
 
-p {
+.enter-code-error {
   margin-top: 43px;
   position: absolute;
   font-size: 13px;

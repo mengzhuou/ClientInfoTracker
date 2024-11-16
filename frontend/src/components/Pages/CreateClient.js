@@ -66,7 +66,7 @@ const CreateClient = () => {
                 await createRecord(clientDetails);
                 console.log('new client added');
                 resetFields();
-                navigate('/'); // redirects to home page
+                navigate('/MainPage'); // redirects to home page
             } catch (error) {
                 console.error('Error adding client: ', error);
             }
