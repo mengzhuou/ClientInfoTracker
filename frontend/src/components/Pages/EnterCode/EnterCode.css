@@ -8,13 +8,15 @@
 }
   
 .enter-page-container {
+  background-color: #E8E6E0;
+  padding: 20px;
+  border-radius: 12px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 40%;
-  height: auto;
-  background-color:#E8E6E0;
 }
 
 .enter-page-container form {
@@ -28,7 +30,10 @@
   padding: 10px;
   font-size: 16px;
   border: none;
-  background-color: #D9D9D9;
+  border: 2px solid #D2A37E;
+  border-radius: 4px;
+  background-color: #fff;
+  width: 90%;
 }
 
 .enter-page-container input:focus {
@@ -63,14 +68,6 @@
   white-space: nowrap;
   text-align: center;
   color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  -webkit-text-stroke-width: clamp(1px, 0.3vw, 2px);
   font-size: clamp(25px, 3vw, 35px);
   font-style: normal;
-}
-
-@media (max-width: 600px) {
-  .enter-page-container {
-    width: 80%;
-  }
 }
