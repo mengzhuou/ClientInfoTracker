@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw;
 }
   
 .enter-page-container {
@@ -11,8 +12,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 480px;
-  height: 243px;
+  width: 40%;
+  height: auto;
   background-color:#E8E6E0;
 }
 
@@ -54,6 +55,18 @@
   position: absolute;
   font-size: 13px;
   color: red;
+}
+
+.enter-code-title {
+  font-family: sans-serif;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  text-align: center;
+  color: #000000;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-text-stroke-width: clamp(1px, 0.3vw, 2px);
+  font-size: clamp(25px, 3vw, 35px);
+  font-style: normal;
 }
 
 @media (max-width: 600px) {

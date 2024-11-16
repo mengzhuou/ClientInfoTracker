@@ -39,7 +39,7 @@ const EnterCode = () => {
   return (
     <div className="enter-page">
         <div className="enter-page-container">
-            <h2>Enter Code</h2>
+            <p className='title'>Enter Code</p>
             <form onSubmit={handleSubmit}>
               <input
                 type="password"
