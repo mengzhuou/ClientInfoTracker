@@ -1,38 +1,62 @@
 const mongoose = require('mongoose')
 
 const recordSchema = new mongoose.Schema({
+    //company, name, hobby, importantDate, note, additionalNote, family, birthday, reasonOfKnowing, email, position, phoneNumber
+    name: {
+        type: String,
+        required: true
+    },
     company: {
         type: String,
         required: true
     },
-    type: {
+    hobby: {
         type: String,
         required: true
     },
-    jobTitle: {
-        type: String,
-        required: true
-    },
-    date: {
+    importantDate: {
         type: Date,
-        required: true
+        required: false
     },
-    receivedInterview: {
-        type: Boolean,
-        required: true
-    },
-    websiteLink: {
+    note: {
         type: String,
-        required: true
+        required: false
     },
-    comment: {
+    familySituation: {
         type: String,
-        required: true
+        required: false
     },
-    click: {
+    birthday: {
+        type: String,
+        required: false
+    },
+    reasonOfKnowing: {
+        type: String,
+        required: false
+    },
+    position: {
+        type: String,
+        required: false
+    },
+    phoneNumber: {
         type: Number,
-        required: true
+        required: false
+    },
+    email: {
+        type: String,
+        required: false
+    },
+    additionalNote: {
+        type: String,
+        required: false
+    },
+    draftStatus: {
+        type: Boolean,
+        required: true,
+        default: false
     }
-})
+}, {
+    timestamps: true
+});
 
 module.exports = mongoose.model('Record', recordSchema)

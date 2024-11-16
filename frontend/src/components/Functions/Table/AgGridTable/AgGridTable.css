@@ -1,0 +1,77 @@
+html {
+    overflow: hidden;
+}
+
+.ag-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFDF8;
+}
+
+.page-container {
+    width: 80vw;
+    height: auto;
+    overflow-y: visible;
+}
+
+.ag-root-wrapper {
+    border: transparent;
+}
+
+.ag-root-wrapper.ag-layout-normal {
+    border: none;
+    overflow-y: auto;
+}
+
+.ag-header, .ag-advanced-filter-header {
+    background-color: #FFFDF8;
+    border-top: 2px solid #CB997E;
+    border-bottom: 2px solid #CB997E;
+}
+
+.ag-row {
+    border-bottom: 2px solid #CB997E;
+    background-color: #FFFDF8;
+}
+
+.ag-header-cell-resize::after {
+    background-color: transparent;
+}
+
+.ag-header-group-cell-label, .ag-cell-label-container {
+    font-size: 22px;
+    font-family: serif;
+}
+
+.ag-center-cols-viewport {
+    background-color: #FFFDF8;
+}
+
+.ag-paging-page-size {
+    display: none; 
+}
+
+.ag-paging-panel {
+    background-color: #FFFDF8;
+    color: #CB997E;
+    border-top: transparent;
+    font-size: 15px;
+}
+
+.ag-icon {
+    color: #CB997E;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.ag-body .ag-theme-alpine {
+    max-height: 450px;
+    overflow-y: scroll;
+}
+
+.ag-body .ag-theme-alpine::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}

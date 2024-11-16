@@ -16,7 +16,6 @@
     font-size: 28px;
     font-weight: bold;
     margin: 3px 0px 3px 5%;
-    padding: 8px 0px 8px 0px;
     color: #FFFFFF;
     width: 20%;
 }
@@ -32,13 +31,15 @@
 
 .navTitle {
     font-family: "Tiro Devanagari Hindi";
-    font-size: clamp(1rem, 3vw, 2rem);
+    font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 300;
     white-space: nowrap;
     text-align: center;
     color: #000000;
     text-shadow: 0px 4px 4px rgba(0,0,0,0.5);
     -webkit-text-stroke-width: clamp(1px, 0.3vw, 2px);
+    background-color: transparent;
+    border: none;
 }
 
 .nav-list {
@@ -57,45 +58,113 @@
 }
 
 .dropdownIcon{
-    margin-top: 7%;
-    font-size: 12px;
+    display: none;
+    font-size: 30px;
     cursor: pointer;
     color: #FFFFFF;
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-bottom: 3px;
+    border-radius: 10px;
+    transition-duration: 0.4s;
+    &:hover {
+        background-color: rgb(64, 64, 64);
+    }
+    &:active {
+        transition-duration: 0.1s;
+        background-color: rgb(30, 30, 30);
+    }
 }
 
 .dropdown-container {
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
     position: absolute;
     right: 0;
     top: 100%;
     width: auto;
     height: auto;
-    align-items: center;
-    border-radius: 0 0 10% 10%;
+    align-items: stretch;
+    border-radius: 10px;
     border: 2px solid black;
     overflow: hidden;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); 
     margin-right: 2%;
 }
 
-.dropdown-content {
-    background-color: #E7EFF2;
-    position: relative;
-    font-size: 21px;
-    padding: 5px 5px 5px 5px;
-    color: black;
-    border-bottom: 2px solid black;
-    text-align: center;
-    cursor: pointer;
+.dropdown-container.show {
+    animation: fadeIn 0.2s forwards;
 }
 
-.dropdown-content:last-child {
+.dropdown-container.hide {
+    animation: fadeOut 0.2s forwards;
+}
+
+.dropdown-content {
+    font-family: "Tiro Devanagari Hindi";
+    font-size: 25px;
+    padding: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    border-style: none none solid none;
+    border-color: #000000;
+    border-width: 0 0 2px 0;
+    background-color: rgb(122, 122, 122);
+    transition-duration: 0.4s;
+    &:hover {
+        background-color: rgb(61, 61, 61);
+    }
+    &:active {
+        transition-duration: 0.1s;
+        background-color: rgb(30, 30, 30);
+    }
+}
+
+.dropdown-container li:last-child .dropdown-content {
     border-bottom: none;
 }
 
-.navBar-EnterCode {
-    padding-left: 10px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    font-size: 20px;
-    color: #787777;
+@media (max-width: 768px) {
+    .nav-list {
+        display: none;
+    }
+    .dropdown-container {
+        display: flex;
+    }
+    .dropdownIcon {
+        display: flex;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+    }
 }

@@ -1,51 +1,77 @@
 import React, { Component } from "react";
-import { AgGridReact } from 'ag-grid-react';
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-alpine.css';
 import './RecordTable.css';
+import AgGridTable from '../AgGridTable/AgGridTable.js';
 import { getRecords } from '../../../../connector.js';
-
-
 
 class RecordTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            records: [],
             columnDefs: [
-                { headerName: "Company", field: "company", sortable: true, filter: true, width: 230 },
-                { headerName: "Type", field: "type", sortable: true, filter: true, width: 130 },
-                { headerName: "Job Title", field: "jobTitle", sortable: true, filter: true, width: 230 },
-                { headerName: "Date", field: "date", sortable: true, filter: true, width: 120 },
-                { headerName: "Interview", field: "receivedInterview", sortable: true, filter: true, width: 110 },
-                { headerName: "Link", field: "websiteLink", sortable: true, filter: true, width: 120 },
-                { headerName: "Comment", field: "comment", sortable: true, filter: true, width: 140 },
-                { headerName: "Click", field: "click", sortable: true, filter: true, width: 130 },
-            ]
+                { headerName: "Name", field: "name", sortable: true, flex: 1 },
+                { headerName: "Company", field: "company", sortable: true, flex: 1 },
+                { headerName: "Hobby", field: "hobby", sortable: true, flex: 1 },
+                { headerName: "Important Event Date", cellRenderer: this.importantDateFormatter, sortable: true, cellStyle: { 'white-space': 'pre' }, flex: 2, wrapText: true, autoHeight:true },
+                { headerName: "Family", field: "familySituation", sortable: true, flex: 1 }
+            ],
+            defaultColDef: { sortable: true, resizable: true },
+            domLayout: 'autoHeight',
+            suppressHorizontalScroll: true
         };
     }
-
     componentDidMount() {
         this.loadRecords();
+    }
+
+    //function for combine important date and note to show in one cell
+    importantDateFormatter = (params) => {
+        let date = params.data.importantDate;
+
+        if (!date) {
+            date = '';
+        } else {
+            const time = new Date(date);
+            date = time.toISOString().split('T')[0];
+        }
+        if (!params.data.note) {
+            params.data.note = '';
+        }
+        return date  + '\n' + params.data.note;
     }
 
     loadRecords = async () => {
         try {
             const records = await getRecords();
-            this.setState({ records });
+            const reversedRecords = records.reverse();
+            console.log("records: ", records)
+            this.setState({ records: reversedRecords });
         } catch (error) {
             console.error("Error loading records:", error);
         }
     };
 
+    dateFormatter = (params) => {
+        if (!params.value){
+            return '';
+        }
+        const date = new Date(params.value);
+        if (!isNaN(date)) {
+            return date.toISOString().split('T')[0];
+        }
+        return params.value;
+    }
+
     render() {
+        const { rowData } = this.props; 
         return (
             <div className="body">
-                <div className="RecordPageContainer ag-theme-alpine" style={{ height: 500, width: '100%' }}>
-                    <AgGridReact
-                        rowData={this.state.records}
+                <div className="RecordPageContainer">
+                    <AgGridTable
+                        rowData={rowData} 
                         columnDefs={this.state.columnDefs}
                         defaultColDef={this.state.defaultColDef}
+                        domLayout={this.state.domLayout}
+                        suppressHorizontalScroll={this.state.suppressHorizontalScroll}
                     />
                 </div>
             </div>
