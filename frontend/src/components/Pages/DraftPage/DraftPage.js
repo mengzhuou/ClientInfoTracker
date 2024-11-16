@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './DraftPage.css';
-import axios from 'axios';
 import DraftList from '../../Functions/Draft/DraftList';
 import DeletePopup from '../../Functions/PopupModals/DeletePopup/DeletePopup.js';
 import { withFuncProps } from '../../withFuncProps';

@@ -1,84 +1,108 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './CreateClient.css';
-import { useNavigate } from 'react-router-dom';
+import { withFuncProps } from "../withFuncProps";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import { createRecord } from '../../connector';
 
-const CreateClient = () => {
-    // allows me to push users back to the home page after submission
-    const navigate = useNavigate();
+const CreateClient = (props) => {
+    // Initialize formData state from localStorage
+    const savedData = JSON.parse(localStorage.getItem('createClientFormData')) || {};
+    const [formData, setFormData] = useState({
+        name: savedData.name || '',
+        company: savedData.company || '',
+        hobby: savedData.hobby || '',
+        importantDate: savedData.importantDate || '',
+        note: savedData.note || '',
+        familySituation: savedData.familySituation || '',
+        birthday: savedData.birthday || '',
+        reasonOfKnowing: savedData.reasonOfKnowing || '',
+        position: savedData.position || '',
+        phoneNumber: savedData.phoneNumber || '',
+        email: savedData.email || '',
+        additionalNote: savedData.additionalNote || ''
+    });
 
-    // all state variables in form
-    const [name, setName] = useState('');
-    const [company, setCompany] = useState('');
-    const [hobby, setHobby] = useState('');
-    const [importantDate, setImportantDate] = useState('');
-    const [note, setNote] = useState('');
-    const [familySituation, setFamilySituation] = useState('');
-    const [birthday, setBirthday] = useState('');
-    const [reasonOfKnowing, setReasonOfKnowing] = useState('');
-    const [position, setPosition] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
-    const [additionalNote, setAdditionalNode] = useState('');
+    // Handle input changes and update formData
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        const updatedData = { ...formData, [name]: value };
+        setFormData(updatedData);
+        // Save updated data to localStorage
+        localStorage.setItem('createClientFormData', JSON.stringify(updatedData));
+    };
+
+    // Handle date picker changes
+    const handleDateChange = (name, date) => {
+        const updatedData = { ...formData, [name]: date };
+        setFormData(updatedData);
+        // Save updated data to localStorage
+        localStorage.setItem('createClientFormData', JSON.stringify(updatedData));
+    };
 
     // Function to handle saving as a draft
     const handleSaveDraft = async (e) => {
+        e.preventDefault();
+        const { name, hobby, company } = formData;
         if (!(name === "" || hobby === "" || company === "")) {
+            const draftDetails = {
+                ...formData,
+                importantDate: formData.importantDate ? formData.importantDate.toISOString() : null,
+                birthday: formData.birthday ? formData.birthday.toISOString() : null,
+                draftStatus: true
+            };
             try {
-                e.preventDefault();
-                const draftDetails = {
-                    name,
-                    company,
-                    hobby,
-                    importantDate: importantDate ? importantDate.toISOString() : null,
-                    note,
-                    familySituation,
-                    birthday: birthday ? birthday.toISOString() : null,
-                    reasonOfKnowing,
-                    position,
-                    phoneNumber,
-                    email,
-                    additionalNote,
-                    draftStatus: true // Setting draft status to true
-                };
                 await createRecord(draftDetails);
                 console.log('Draft saved successfully');
                 resetFields();
-                navigate('/draft'); // Navigate to drafts page after saving
+                props.navigate('/draft');
             } catch (error) {
                 console.error('Error saving draft:', error);
+                alert('Failed to save draft. Data is saved locally.');
             }
         }
     };
 
-    // upon submission, post data to backend, clear fields, send to home page
+    // Submit client details
     const handleSubmit = async (e) => {
+        e.preventDefault();
+        const { name, hobby, company } = formData;
         if (!(name === "" || hobby === "" || company === "")) {
+            const clientDetails = {
+                ...formData,
+                importantDate: formData.importantDate ? formData.importantDate.toISOString() : null,
+                birthday: formData.birthday ? formData.birthday.toISOString() : null,
+                draftStatus: false  
+            };
             try {
-                e.preventDefault(); // prevents refreshing and losing data
-
-                const clientDetails = { name, company, hobby, importantDate: importantDate ? importantDate.toISOString(): null, note, familySituation, birthday: birthday ? birthday.toISOString(): null,
-                    reasonOfKnowing, position, phoneNumber, email, additionalNote, draftStatus: false
-                }
-                console.log(clientDetails);
                 await createRecord(clientDetails);
-                console.log('new client added');
+                console.log('New client added');
                 resetFields();
-                navigate('/'); // redirects to home page
+                props.navigate('/');
             } catch (error) {
-                console.error('Error adding client: ', error);
+                console.error('Error adding client:', error);
+                alert('Failed to add client. Data is saved locally.');
             }
         }
-    }
+    };
 
-    // removes all fields
+    // Reset form fields
     const resetFields = () => {
-        setName(''); setCompany(''); setHobby(''); setImportantDate('');
-        setNote(''); setFamilySituation(''); setBirthday('');
-        setReasonOfKnowing(''); setPosition(''); setPhoneNumber('');
-        setEmail(''); setAdditionalNode('');
+        setFormData({
+            name: '',
+            company: '',
+            hobby: '',
+            importantDate: '',
+            note: '',
+            familySituation: '',
+            birthday: '',
+            reasonOfKnowing: '',
+            position: '',
+            phoneNumber: '',
+            email: '',
+            additionalNote: ''
+        }); 
+        localStorage.removeItem('createClientFormData');
     };
 
     return (
@@ -93,8 +117,9 @@ const CreateClient = () => {
                                 className='name'
                                 type="text"
                                 required
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='label-input-group'>
@@ -103,18 +128,21 @@ const CreateClient = () => {
                                 className='company'
                                 type="text"
                                 required
-                                value={company}
-                                onChange={(e) => setCompany(e.target.value)}
+                                name="company"
+                                value={formData.company}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='label-input-group'>
                             <label>Hobby</label>
                             <input
+                                placeholder="Hobby"
                                 className='hobby'
                                 type="text"
                                 required
-                                value={hobby}
-                                onChange={(e) => setHobby(e.target.value)}
+                                name="hobby"
+                                value={formData.hobby}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
@@ -124,11 +152,10 @@ const CreateClient = () => {
                             <DatePicker
                                 className="date-important"
                                 dateFormat="yyyy/MM/dd"
-                                selected={importantDate}
-                                type="text"
-                                onChange={(date) => setImportantDate(date)}
+                                selected={formData.importantDate}
+                                onChange={(date) => handleDateChange('importantDate', date)}
                                 placeholderText='YYYY/MM/DD'
-                                portalId="root-portal" // keeps the calendar fixed
+                                portalId="root-portal"
                             />
 
                         </div>
@@ -137,8 +164,9 @@ const CreateClient = () => {
                             <input
                                 className='note'
                                 type="text"
-                                value={note}
-                                onChange={(e) => setNote(e.target.value)}
+                                name="note"
+                                value={formData.note}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
@@ -148,17 +176,18 @@ const CreateClient = () => {
                             <input
                                 className='family-situation'
                                 type="text"
-                                value={familySituation}
-                                onChange={(e) => setFamilySituation(e.target.value)}
+                                name="familySituation"
+                                value={formData.familySituation}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='label-input-group'>
                             <label>Birthday</label>
                             <DatePicker
                                 className='birthday'
-                                selected={birthday}
+                                selected={formData.birthday}
                                 dateFormat="yyyy/MM/dd"
-                                onChange={(date) => setBirthday(date)}
+                                onChange={(date) => handleDateChange('birthday', date)}
                                 placeholderText='YYYY/MM/DD'
                                 portalId="root-portal"
                             />
@@ -168,8 +197,9 @@ const CreateClient = () => {
                             <input
                                 className='reason-of-knowing'
                                 type="text"
-                                value={reasonOfKnowing}
-                                onChange={(e) => setReasonOfKnowing(e.target.value)}
+                                name="reasonOfKnowing"
+                                value={formData.reasonOfKnowing}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
@@ -179,18 +209,18 @@ const CreateClient = () => {
                             <label>Position</label>
                             <input
                                 className='position'
-                                type="text"
-                                value={position}
-                                onChange={(e) => setPosition(e.target.value)}
+                                name="position"
+                                value={formData.position}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='label-input-group'>
                             <label>Phone Number</label>
                             <input
                                 className='phone-number'
-                                type="text"
-                                value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                name="phoneNumber"
+                                value={formData.phoneNumber}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='label-input-group'>
@@ -198,8 +228,9 @@ const CreateClient = () => {
                             <input
                                 className='email'
                                 type="text"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
@@ -209,14 +240,17 @@ const CreateClient = () => {
                             <label>Additional Note</label>
                             <textarea
                                 className='additional-note'
-                                value={additionalNote}
-                                onChange={(e) => setAdditionalNode(e.target.value)}
+                                type="text"
+                                name="additionalNote"
+                                value={formData.additionalNote}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
                     <div className='bottom-buttons'>
                         <button type="submit" onClick={handleSaveDraft} className='save-draft'>Save Draft</button>
                         <button type="submit" onClick={handleSubmit} className='submit'>Submit</button>
+                        {/* <button type="button" onClick={resetFields} className='clear'>Clear</button> */}
                     </div>
                 </form>
             </div>
@@ -224,4 +258,4 @@ const CreateClient = () => {
     );
 }
 
-export default CreateClient;
+export default withFuncProps(CreateClient);
