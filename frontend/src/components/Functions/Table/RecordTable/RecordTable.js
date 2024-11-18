@@ -44,7 +44,6 @@ class RecordTable extends Component {
         try {
             const records = await getRecords();
             const reversedRecords = records.reverse();
-            console.log("records: ", records)
             this.setState({ records: reversedRecords });
         } catch (error) {
             console.error("Error loading records:", error);

@@ -24,7 +24,6 @@ const DraftList = ({ openDeletePopup }) => {
 
 
     const handleRowSelected = (selectedData) => {
-        console.log("Navigating to /edit-existing-client with:", selectedData);
         navigate('/edit-existing-client', { state: { selectedRow: selectedData } });
     };
     

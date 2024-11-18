@@ -44,7 +44,6 @@ const CreateClient = () => {
                     draftStatus: true // Setting draft status to true
                 };
                 await createRecord(draftDetails);
-                console.log('Draft saved successfully');
                 resetFields();
                 navigate('/draft'); // Navigate to drafts page after saving
             } catch (error) {
@@ -62,9 +61,7 @@ const CreateClient = () => {
                 const clientDetails = { name, company, hobby, importantDate: importantDate ? importantDate.toISOString(): null, note, familySituation, birthday: birthday ? birthday.toISOString(): null,
                     reasonOfKnowing, position, phoneNumber, email, additionalNote, draftStatus: false
                 }
-                console.log(clientDetails);
                 await createRecord(clientDetails);
-                console.log('new client added');
                 resetFields();
                 navigate('/MainPage'); // redirects to home page
             } catch (error) {

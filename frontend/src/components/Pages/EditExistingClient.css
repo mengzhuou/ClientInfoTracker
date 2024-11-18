@@ -141,7 +141,7 @@ label {
     border-color: #938f8f;
 }
 
-.save-draft, .submit, .delete {
+.save-draft, .edit-submit, .delete {
     background-color: #CB997E;
     border: none;
     border-radius: 8px;
@@ -154,7 +154,7 @@ label {
     min-width: 100px;
 }
 
-.save-draft:hover, .submit:hover, .delete:hover {
+.save-draft:hover, .edit-submit:hover, .delete:hover {
     background-color: #d1d5db;
 }
 
@@ -162,7 +162,7 @@ label {
     margin-right: 80px;
 }
 
-.submit {
+.edit-submit {
     margin-right: 80px;
 }
 
