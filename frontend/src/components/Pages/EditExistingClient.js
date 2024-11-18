@@ -62,12 +62,7 @@ const EditExistingClient = () => {
 
     // Function to handle saving as a draft
     const handleSaveDraft = async (e) => {
-        const normalizedRow = Array.isArray(location.state.selectedRow)
-            ? location.state.selectedRow
-            : [location.state.selectedRow];
-    
-        const row = normalizedRow[0]; // Access the first item in the array
-
+        const row = selectedRow;
 
         if (!(name === "" || hobby === "" || company === "")) {
             try {
@@ -109,10 +104,8 @@ const EditExistingClient = () => {
 
        // upon submission, post data to backend, clear fields, send to home page
        const handleSubmit = async (e) => {
-         const normalizedRow = Array.isArray(location.state.selectedRow) ? location.state.selectedRow : [location.state.selectedRow];
-         const row = normalizedRow[0];
-
-         const prevDraftStatus = row.draftStatus;
+        const row = selectedRow;
+        const prevDraftStatus = row.draftStatus;
 
         if (!(name === "" || hobby === "" || company === "")) {
             try {
@@ -150,10 +143,7 @@ const EditExistingClient = () => {
     const confirmDelete = async () => {
         if (recordToDelete) {
             try {
-                console.log(`Deleting record with ID: ${recordToDelete}`); // Debug log
                 await deleteRecord(recordToDelete); // Call the delete API
-                console.log("Record deleted successfully!");
-                console.log("Navigating to '/'...");
                 navigate('/MainPage'); // Navigate to the main page
             } catch (error) {
                 console.error("Error deleting record:", error);
@@ -174,19 +164,18 @@ const EditExistingClient = () => {
     };
 
     const getUpdatedAt = () => {
-        if (!location.state?.selectedRow) {
+        if (!selectedRow) {
             return "No data available"; // Default text if no data
         }
     
-        const normalizedRow = Array.isArray(location.state.selectedRow) ? location.state.selectedRow : [location.state.selectedRow];
-        const row = normalizedRow[0];
+        const row = selectedRow;
         if(row.draftStatus){
             return row.createdAt ? new Date(row.createdAt).toLocaleString() : "No update time available";
         } else {
             return row.updatedAt ? new Date(row.updatedAt).toLocaleString() : "No update time available";
         }
     };
-    
+
     return (
         <div className='edit-client-page-body'>
             <div className='edit-client-container'>

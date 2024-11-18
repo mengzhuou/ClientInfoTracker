@@ -24,9 +24,9 @@
 
 .nodraft-message {
     position: absolute;
-    color: #000;
+    color: #ff0000;
     font-family: 'Montserrat';
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 400;
     white-space: nowrap;
 }
