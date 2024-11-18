@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-import { updateRecord, deleteRecord, deleteDraft, createRecord, updateDraft } from '../../connector';
+import { updateRecord, deleteRecord, deleteDraft, createRecord } from '../../connector';
 import DeletePopup from '../Functions/PopupModals/DeletePopup/DeletePopup';
 
 const EditExistingClient = () => {
@@ -53,7 +53,7 @@ const EditExistingClient = () => {
             setAdditionalNote(row.additionalNote || '');
         } else {
             console.error("No data found");
-            navigate('/'); // Redirect to main page if no data is found
+            navigate('/MainPage'); // Redirect to main page if no data is found
         }
     }, [location.state, navigate]);
     
@@ -87,7 +87,7 @@ const EditExistingClient = () => {
                     additionalNote,
                     draftStatus: true // Setting draft status to true
                 };
-                if(row._id!=undefined){
+                if(row._id!==undefined){
                     await updateRecord(row._id,draftDetails);
                 } else
                 await createRecord(draftDetails);
@@ -130,7 +130,7 @@ const EditExistingClient = () => {
                         await deleteDraft(row._id);
                     }
                 resetFields();
-                navigate('/'); // redirects to home page
+                navigate('/MainPage'); // redirects to home page
             } catch (error) {
                 console.error('Error editing client: ', error);
             }
@@ -154,7 +154,7 @@ const EditExistingClient = () => {
                 await deleteRecord(recordToDelete); // Call the delete API
                 console.log("Record deleted successfully!");
                 console.log("Navigating to '/'...");
-                navigate('/'); // Navigate to the main page
+                navigate('/MainPage'); // Navigate to the main page
             } catch (error) {
                 console.error("Error deleting record:", error);
             }
