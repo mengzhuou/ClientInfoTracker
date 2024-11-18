@@ -235,7 +235,7 @@ const EditExistingClient = () => {
                         </div>
                         <div className='label-input-group'>
                             <label>Note</label>
-                            <input
+                            <textarea
                                 className='note'
                                 type="text"
                                 value={note}
