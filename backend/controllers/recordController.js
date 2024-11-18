@@ -59,4 +59,25 @@ const deleteRecord = asyncHandler(async (req, res) => {
     res.status(200).json({ message: 'Record deleted' });
 });
 
-module.exports = { getRecords, createRecord, getDrafts, deleteRecord };
+// @desc Update a Record
+// @route PUT /Records/:id
+// @access Private
+const updateRecord = asyncHandler(async (req, res) => {
+    const recordId = req.params.id;
+    const updates = req.body;
+
+    // Find and update the record, returning the updated document
+    const record = await Record.findByIdAndUpdate(recordId, updates, {
+        new: true, // Return the updated record instead of the old one
+        runValidators: true, // Ensure validation rules in the schema are applied
+    });
+
+    if (!record) {
+        res.status(404);
+        throw new Error('Record not found');
+    }
+
+    res.status(200).json(record); // Send the updated record back as the response
+});
+
+module.exports = { getRecords, createRecord, getDrafts, deleteRecord, updateRecord };
