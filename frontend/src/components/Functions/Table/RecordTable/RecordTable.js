@@ -16,8 +16,9 @@ class RecordTable extends Component {
             ],
             defaultColDef: { sortable: true, resizable: true },
             domLayout: 'autoHeight',
-            suppressHorizontalScroll: true
+            suppressHorizontalScroll: true,
         };
+    this.gridApi=null;
     }
     componentDidMount() {
         this.loadRecords();
@@ -61,6 +62,24 @@ class RecordTable extends Component {
         return params.value;
     }
 
+    onGridReady = (params) => {
+        this.gridApi = params.api; // Save the grid API for later use
+    };
+
+    // handleRowSelected = () => {
+    //     const selectedData = this.gridApi.getSelectedRows();
+    //     console.log("Selected Row Data:", selectedData); // Debugging
+    //     return selectedData;
+    
+    // }
+
+    onSelectionChanged = () => {
+        if (this.gridApi && this.props.onRowSelected) {
+            const selectedRows = this.gridApi.getSelectedRows();
+            this.props.onRowSelected(selectedRows); // Pass selected data to parent
+        }
+    };
+
     render() {
         const { rowData } = this.props; 
         return (
@@ -72,6 +91,8 @@ class RecordTable extends Component {
                         defaultColDef={this.state.defaultColDef}
                         domLayout={this.state.domLayout}
                         suppressHorizontalScroll={this.state.suppressHorizontalScroll}
+                        onGridReady={this.onGridReady} 
+                        onSelectionChanged={this.onSelectionChanged}
                     />
                 </div>
             </div>

@@ -4,13 +4,23 @@ import RecordTable from "../../Functions/Table/RecordTable/RecordTable";
 import ClientSearch from "../../ClientSearch";
 import './MainPage.css';
 import { getRecords } from "../../../connector.js";
+import { useNavigate } from "react-router-dom";
+
+
+export function withNavigation(Component) {
+    return function WrappedComponent(props) {
+        const navigate = useNavigate();
+        return <Component {...props} navigate={navigate} />;
+    };
+}
 
 class MainPage extends Component {
    constructor(props) {
        super(props);
        this.state = {
            records: [], 
-           searchTerm: '' 
+           searchTerm: '',
+           selectedRowData: null
        };
    }
 
@@ -42,6 +52,13 @@ class MainPage extends Component {
        );
    };
 
+   handleRowSelected = (selectedData) => {
+    this.setState({ selectedRowData: selectedData }, ()=>{
+        this.props.navigate('/edit-existing-client', { state: { selectedRow: selectedData } });
+    });
+    console.log("Selected Row Data:", selectedData); // Debugging
+    };
+
    render() {
        const filteredData = this.getFilteredData();
 
@@ -52,7 +69,8 @@ class MainPage extends Component {
                        <ClientSearch onSearch={this.handleSearch} />
                    </div>
                    <div className="record-table-section">
-                       <RecordTable rowData={filteredData} /> {}
+                       <RecordTable rowData={filteredData}
+                       onRowSelected={this.handleRowSelected} /> {}
                    </div>
                </div>
            </div>
@@ -60,4 +78,4 @@ class MainPage extends Component {
    }
 }
 
-export default withFuncProps(MainPage);
+export default withFuncProps(withNavigation(MainPage));

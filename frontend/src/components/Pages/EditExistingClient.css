@@ -1,0 +1,250 @@
+.title {
+    font-family: sans-serif;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    text-align: center;
+    color: #000000;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    -webkit-text-stroke-width: clamp(1px, 0.3vw, 2px);
+    font-size: clamp(35px, 3vw, 45px);
+    font-style: normal;
+}
+
+.last-update-time-container {
+    display: flex; /* Ensures labels are inline */
+    justify-content: flex-end; /* Aligns content to the right */
+    align-items: center; /* Aligns content vertically */
+    padding-right: 20px; /* Add padding on the right if needed */
+}
+
+.updatedAt {
+    margin-left: 5px; /* Space between "Last Updated Time:" and timestamp */
+    white-space: nowrap; /* Prevents the text from wrapping to a new line */
+}
+
+
+.label-input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px; 
+}
+
+.label-input-group input {
+    padding: 10px;
+    border: 1px solid #938f8f;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    box-sizing: border-box;
+}
+
+.label-input-group label {
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.create-client-page-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin-top: 100px;
+    width: 100vw;
+}
+
+
+.create-client-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.form-scrollable {
+    max-height: 80vh;
+    overflow: auto;
+    padding-bottom: 20px; 
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; 
+}
+
+
+label {
+    display: block;
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-row1 {
+    text-align: center;
+    display: flex;
+    gap: 20px;
+}
+
+.form-row2 {
+    text-align: center;
+    display: flex;
+    padding-top: 8px;
+    gap: 20px;
+    justify-content:center;
+}
+.date-important {
+    padding: 10px;
+    padding-right: 50px;
+    margin-right: 20px;
+}
+
+.form-row3 {
+    text-align: center;
+    display: flex;
+    gap: 20px;
+    padding-top: 8px;
+}
+
+.form-row4 {
+    text-align: center;
+    display: flex;
+    gap: 20px;
+    padding-top: 8px;
+}
+
+.form-row5 {
+    text-align: center;
+    padding-top: 8px;
+    display: flex;
+    justify-content:center;
+}
+
+.bottom-buttons {
+    text-align: center;
+    padding-top: 8px;
+}
+
+.additional-note {
+    padding: 15px;
+    width: 300px;
+    height: 50px;
+    field-sizing: content;
+    border-color: #938f8f;
+}
+
+.save-draft, .submit, .delete {
+    background-color: #CB997E;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease-in-out;
+    min-width: 100px;
+}
+
+.save-draft:hover, .submit:hover, .delete:hover {
+    background-color: #d1d5db;
+}
+
+.save-draft {
+    margin-right: 80px;
+}
+
+.submit {
+    margin-right: 80px;
+}
+
+
+
+.name {
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.name::placeholder {
+    text-align: center;
+}
+
+.company {
+    padding: 10px;
+    margin-right: 20px
+}
+
+.company::placeholder {
+    text-align: center;
+}
+
+.hobby {
+    padding: 10px;
+}
+
+.hobby::placeholder {
+    text-align: center;
+}
+
+.email {
+    padding: 10px;
+}
+
+.email::placeholder {
+    text-align: center;
+}
+
+.family-situation {
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.family-situation::placeholder {
+    text-align: center;
+}
+
+.reason-of-knowing {
+    padding: 10px;
+}
+
+.reason-of-knowing::placeholder {
+    text-align: center;
+}
+
+.birthday {
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.birthday::placeholder {
+    text-align: center;
+}
+
+.position {
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.position::placeholder {
+    text-align: center;
+}
+
+.phone-number {
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.phone-number::placeholder {
+    text-align: center;
+}
+
+.note {
+    padding: 10px;
+}
+
+.note::placeholder {
+    text-align: center;
+}
