@@ -8,18 +8,23 @@
     -webkit-text-stroke-width: clamp(1px, 0.3vw, 2px);
     font-size: clamp(35px, 3vw, 45px);
     font-style: normal;
+    margin-bottom: 12px;
 }
 
 .last-update-time-container {
-    display: flex; /* Ensures labels are inline */
-    justify-content: flex-end; /* Aligns content to the right */
-    align-items: center; /* Aligns content vertically */
-    padding-right: 20px; /* Add padding on the right if needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
+.updateLabel {
+    color: #9C9C9C;
+}
 .updatedAt {
     margin-left: 5px; /* Space between "Last Updated Time:" and timestamp */
     white-space: nowrap; /* Prevents the text from wrapping to a new line */
+    color: #9C9C9C;
 }
 
 
@@ -46,7 +51,7 @@
     color: #333;
 }
 
-.create-client-page-body {
+.edit-client-page-body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,7 +62,7 @@
 }
 
 
-.create-client-container {
+.edit-client-container {
     display: flex;
     flex-direction: column;
     align-items: center;

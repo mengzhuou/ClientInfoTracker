@@ -202,15 +202,14 @@ const EditExistingClient = () => {
     
 return (
     <div className='edit-client-page-body'>
-        <div className = 'last-update-time-container'>
-        <label>Last Updated Time:</label>
-        <label className='updatedAt'>
-            {getUpdatedAt()}
-        </label>
-
-        </div>
         <div className='edit-client-container'>
             <p className='title'>Edit Existing Client</p>
+            <div className = 'last-update-time-container'>
+                <label className='updateLabel'>Last Updated Time:</label>
+                <label className='updatedAt'>
+                    {getUpdatedAt()}
+                </label>
+            </div>
             <form className='form-scrollable'>
                 <div className='form-row1'>
                     <div className='label-input-group'>
