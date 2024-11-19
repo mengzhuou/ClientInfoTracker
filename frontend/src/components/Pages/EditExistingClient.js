@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
-import './CreateClient.css';
-import { useNavigate } from 'react-router-dom';
+import './EditExistingClient.css';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-import { createRecord } from '../../connector';
+import { updateRecord, deleteRecord, deleteDraft, createRecord } from '../../connector';
+import DeletePopup from '../Functions/PopupModals/DeletePopup/DeletePopup';
 
-const CreateClient = () => {
+const EditExistingClient = () => {
     // allows me to push users back to the home page after submission
     const navigate = useNavigate();
+    const location = useLocation(); // Retrieve passed state
+    const [selectedRow, setSelectedRow] = useState({});
 
-    // all state variables in form
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [recordToDelete, setRecordToDelete] = useState(null);
+    
+    // All state variables in form
     const [name, setName] = useState('');
     const [company, setCompany] = useState('');
     const [hobby, setHobby] = useState('');
@@ -21,10 +27,43 @@ const CreateClient = () => {
     const [position, setPosition] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
-    const [additionalNote, setAdditionalNode] = useState('');
+    const [additionalNote, setAdditionalNote] = useState('');
+
+
+
+    useEffect(() => {
+        if (location.state?.selectedRow) {
+            const normalizedRow = Array.isArray(location.state.selectedRow) ? location.state.selectedRow : [location.state.selectedRow];
+    
+            const row = normalizedRow[0]; // Access the first item in the array
+    
+            // Update the state variables with the row data
+            setSelectedRow(row);
+            setName(row.name || '');
+            setCompany(row.company || '');
+            setHobby(row.hobby || '');
+            setImportantDate(row.importantDate ? new Date(row.importantDate) : '');
+            setNote(row.note || '');
+            setFamilySituation(row.familySituation || '');
+            setBirthday(row.birthday ? new Date(row.birthday) : '');
+            setReasonOfKnowing(row.reasonOfKnowing || '');
+            setPosition(row.position || '');
+            setPhoneNumber(row.phoneNumber || '');
+            setEmail(row.email || '');
+            setAdditionalNote(row.additionalNote || '');
+        } else {
+            console.error("No data found");
+            navigate('/MainPage'); // Redirect to main page if no data is found
+        }
+    }, [location.state, navigate]);
+    
+    
+    
 
     // Function to handle saving as a draft
     const handleSaveDraft = async (e) => {
+        const row = selectedRow;
+
         if (!(name === "" || hobby === "" || company === "")) {
             try {
                 e.preventDefault();
@@ -43,6 +82,9 @@ const CreateClient = () => {
                     additionalNote,
                     draftStatus: true // Setting draft status to true
                 };
+                if(row._id!==undefined){
+                    await updateRecord(row._id,draftDetails);
+                } else
                 await createRecord(draftDetails);
                 resetFields();
                 navigate('/draft'); // Navigate to drafts page after saving
@@ -52,36 +94,98 @@ const CreateClient = () => {
         }
     };
 
-    // upon submission, post data to backend, clear fields, send to home page
-    const handleSubmit = async (e) => {
+       // removes all fields
+       const resetFields = () => {
+        setName(''); setCompany(''); setHobby(''); setImportantDate('');
+        setNote(''); setFamilySituation(''); setBirthday('');
+        setReasonOfKnowing(''); setPosition(''); setPhoneNumber('');
+        setEmail(''); setAdditionalNote('');
+    };
+
+       // upon submission, post data to backend, clear fields, send to home page
+       const handleSubmit = async (e) => {
+        const row = selectedRow;
+        const prevDraftStatus = row.draftStatus;
+
         if (!(name === "" || hobby === "" || company === "")) {
             try {
                 e.preventDefault(); // prevents refreshing and losing data
 
-                const clientDetails = { name, company, hobby, importantDate: importantDate ? importantDate.toISOString(): null, note, familySituation, birthday: birthday ? birthday.toISOString(): null,
-                    reasonOfKnowing, position, phoneNumber, email, additionalNote, draftStatus: false
-                }
-                await createRecord(clientDetails);
+                
+                    const clientDetails = { name, company, hobby, importantDate: importantDate ? importantDate.toISOString(): null, note, familySituation, birthday: birthday ? birthday.toISOString(): null,
+                        reasonOfKnowing, position, phoneNumber, email, additionalNote, draftStatus: false
+                    }
+                    if(!prevDraftStatus){
+                        await updateRecord(row._id,clientDetails);
+                    }
+                    else if(prevDraftStatus === true){
+                        await createRecord(clientDetails);
+                        await deleteDraft(row._id);
+                    }
                 resetFields();
                 navigate('/MainPage'); // redirects to home page
             } catch (error) {
-                console.error('Error adding client: ', error);
+                console.error('Error editing client: ', error);
             }
         }
     }
 
-    // removes all fields
-    const resetFields = () => {
-        setName(''); setCompany(''); setHobby(''); setImportantDate('');
-        setNote(''); setFamilySituation(''); setBirthday('');
-        setReasonOfKnowing(''); setPosition(''); setPhoneNumber('');
-        setEmail(''); setAdditionalNode('');
+    const handleDelete = (state) => {
+        // Set the record to delete and show the popup
+        const normalizedRow = Array.isArray(state.selectedRow)
+         ? state.selectedRow
+         : [state.selectedRow];
+         const row = normalizedRow[0];
+        setRecordToDelete(row._id);
+        setIsPopupOpen(true);
+    }
+
+    const confirmDelete = async () => {
+        if (recordToDelete) {
+            try {
+                await deleteRecord(recordToDelete); // Call the delete API
+                navigate('/MainPage'); // Navigate to the main page
+            } catch (error) {
+                console.error("Error deleting record:", error);
+            }
+        } else {
+            console.warn("No record to delete.");
+        }
+        // Close the popup after deletion
+        setIsPopupOpen(false);
+        setRecordToDelete(null);
+    };
+    
+
+    const cancelDelete = () => {
+        // Close the popup without deleting
+        setIsPopupOpen(false);
+        setRecordToDelete(null);
+    };
+
+    const getUpdatedAt = () => {
+        if (!selectedRow) {
+            return "No data available"; // Default text if no data
+        }
+    
+        const row = selectedRow;
+        if(row.draftStatus){
+            return row.createdAt ? new Date(row.createdAt).toLocaleString() : "No update time available";
+        } else {
+            return row.updatedAt ? new Date(row.updatedAt).toLocaleString() : "No update time available";
+        }
     };
 
     return (
-        <div className='create-client-page-body'>
-            <div className='create-client-container'>
-                <p className='title'>Create a New Client</p>
+        <div className='edit-client-page-body'>
+            <div className='edit-client-container'>
+                <p className='title'>Edit Existing Client</p>
+                <div className = 'last-update-time-container'>
+                    <label className='updateLabel'>Last Updated Time:</label>
+                    <label className='updatedAt'>
+                        {getUpdatedAt()}
+                    </label>
+                </div>
                 <form className='form-scrollable'>
                     <div className='form-row1'>
                         <div className='label-input-group'>
@@ -207,18 +311,28 @@ const CreateClient = () => {
                             <textarea
                                 className='additional-note'
                                 value={additionalNote}
-                                onChange={(e) => setAdditionalNode(e.target.value)}
+                                onChange={(e) => setAdditionalNote(e.target.value)}
                             />
                         </div>
                     </div>
                     <div className='bottom-buttons'>
                         <button type="submit" onClick={handleSaveDraft} className='save-draft'>Save Draft</button>
-                        <button type="submit" onClick={handleSubmit} className='submit'>Submit</button>
+                        <button type="submit" onClick={handleSubmit} className='edit-submit'>Submit</button>
+                        <button type="button" onClick={()=>handleDelete(location.state)} className='delete'>Delete</button>
                     </div>
+
+                    {isPopupOpen && (
+                            <DeletePopup
+                                onClose={cancelDelete} // Handle cancel
+                                onConfirm={confirmDelete} // Handle confirm
+                                message="Delete this record permanently?"
+                            />
+                        )}
+                    
                 </form>
             </div>
         </div>
     );
 }
+export default EditExistingClient;
 
-export default CreateClient;

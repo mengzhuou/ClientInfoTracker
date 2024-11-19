@@ -1,18 +1,87 @@
 .title {
-    padding-top: 10px;
-    font-size: medium;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: sans-serif;
+    letter-spacing: 2px;
+    white-space: nowrap;
     text-align: center;
+    color: #000000;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    -webkit-text-stroke-width: clamp(1px, 0.3vw, 2px);
+    font-size: clamp(35px, 3vw, 45px);
+    font-style: normal;
+}
+
+.label-input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px; 
+}
+
+.label-input-group input {
+    padding: 10px;
+    border: 1px solid #938f8f;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    box-sizing: border-box;
+}
+
+.label-input-group label {
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.create-client-page-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin-top: 100px;
+    width: 100vw;
+}
+
+
+.create-client-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.form-scrollable {
+    max-height: 80vh;
+    overflow: auto;
+    padding-bottom: 20px; 
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; 
+}
+
+
+label {
+    display: block;
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 5px;
+    color: #333;
 }
 
 .form-row1 {
     text-align: center;
-    padding-top: 30px;
+    display: flex;
+    gap: 20px;
 }
 
 .form-row2 {
     text-align: center;
-    padding-top: 30px;
+    display: flex;
+    padding-top: 8px;
+    gap: 20px;
+    justify-content:center;
 }
 .date-important {
     padding: 10px;
@@ -22,37 +91,76 @@
 
 .form-row3 {
     text-align: center;
-    padding-top: 30px;
+    display: flex;
+    gap: 20px;
+    padding-top: 8px;
 }
 
 .form-row4 {
     text-align: center;
-    padding-top: 30px;
+    display: flex;
+    gap: 20px;
+    padding-top: 8px;
 }
 
 .form-row5 {
     text-align: center;
-    padding-top: 30px;
+    padding-top: 8px;
+    display: flex;
+    justify-content:center;
 }
 
 .bottom-buttons {
     text-align: center;
-    padding-top: 30px;
+    padding-top: 8px;
 }
 
 .additional-note {
     padding: 15px;
-    width: 300px;
-    height: 50px;
+    width: fit-content;
+    height: fit-content;
+    min-height: 50px;
+    max-height: 150px;
+    min-width: 300px;
+    max-width: 600px;
     field-sizing: content;
     border-color: #938f8f;
 }
 
+.note {
+    padding: 15px;
+    width: fit-content;
+    height: fit-content;
+    min-width: 100px;
+    max-width: 400px;
+    max-height: 150px;
+    field-sizing: content;
+    border-color: #938f8f;
+    border-radius: 5px;
+}
+
+.note::placeholder {
+    text-align: center;
+}
+
+/* Hide scrollbar in Webkit browsers (Chrome, Safari) */
+.note::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar in Webkit browsers (Chrome, Safari) */
+.additional-note::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar in IE, Edge, Firefox */
+.note, .additional-note {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
 .save-draft, .submit {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #e5e7eb;
+    background-color: #CB997E;
     border: none;
     border-radius: 8px;
     padding: 10px 20px;
@@ -61,24 +169,16 @@
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color 0.2s ease-in-out;
-    min-width: 130px;
+    min-width: 100px;
 }
 
 .save-draft:hover, .submit:hover {
     background-color: #d1d5db;
 }
 
-.save-draft::after, .submit::after {
-    content: '>';
-    font-size: 18px;
-    color: gray;
-}
-
 .save-draft {
     margin-right: 80px;
 }
-
-
 
 .name {
     padding: 10px;
@@ -158,104 +258,7 @@
     text-align: center;
 }
 
-.note {
-    padding: 10px;
+@media (max-width: 768px) {
+    
 }
 
-.note::placeholder {
-    text-align: center;
-} 
-
-input, textarea {
-    width: 100%; 
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-textarea {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical; 
-}
-
-.container {
-    margin-top: 80px;
-    padding-left: 20px;
-    padding-right: 20px;
-    min-height: calc(100vh - 80px); 
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
-    overflow-y: auto;
-  }
-  
-  .card {
-    width: 30%;
-    margin: 10px;
-    padding: 15px;
-    background-color: #f0f0f0;
-    border-radius: 8px;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0;
-    overflow-y: auto;
-  }
-
-  @media only screen and (max-width: 1024px) {
-    .container {
-      flex-direction: row; 
-      flex-wrap: wrap;
-      justify-content: center;
-      height: auto;
-      padding: 10px;
-    }
-  
-    .card {
-      width: 100%; 
-      margin-bottom: 15px;
-    }
-  
-    h1 {
-      font-size: 24px;
-    }
-  
-    p {
-      font-size: 16px;
-    }
-  }
-  @media only screen and (max-width: 430px) {
-    .container {
-      flex-direction: column;
-      height: auto;
-      overflow-y: auto;
-      padding: 60px;
-      margin-top: 80px;
-    }
-  
-    .card {
-      width: 100%;
-      margin: 15px;
-    }
-  
-    h1 {
-      font-size: 22px;
-    }
-  
-    p {
-      font-size: 16px;
-    }
-  }
-  html {
-    scroll-behavior: smooth;
-  }

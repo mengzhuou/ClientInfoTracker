@@ -16,7 +16,6 @@
     font-size: 28px;
     font-weight: bold;
     margin: 3px 0px 3px 5%;
-    padding: 8px 0px 8px 0px;
     color: #FFFFFF;
     width: 20%;
 }
@@ -130,6 +129,14 @@
 
 .dropdown-container li:last-child .dropdown-content {
     border-bottom: none;
+}
+
+.navBar-EnterCode {
+    padding-left: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 20px;
+    color: #787777;
 }
 
 @media (max-width: 768px) {

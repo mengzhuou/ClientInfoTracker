@@ -7,13 +7,13 @@
     padding: 5px;
     padding-left: clamp(15px, 3vw, 20px);
     padding-right: clamp(15px, 3vw, 20px);
-    background-color: rgb(122, 122, 122);  
+    background-color: #9d8375; 
     border: none;
     border-radius: 10px;
     box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
     transition-duration: 0.4s;
     &:hover {
-        background-color: rgb(64, 64, 64);
+        background-color: #CB997E;
         cursor: pointer;
     }
     &:active {
