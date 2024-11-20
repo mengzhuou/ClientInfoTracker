@@ -93,9 +93,8 @@ const EditExistingClient = () => {
             }
         }
     };
-
-       // removes all fields
-       const resetFields = () => {
+    // removes all fields
+    const resetFields = () => {
         setName(''); setCompany(''); setHobby(''); setImportantDate('');
         setNote(''); setFamilySituation(''); setBirthday('');
         setReasonOfKnowing(''); setPosition(''); setPhoneNumber('');

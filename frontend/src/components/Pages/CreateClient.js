@@ -43,23 +43,28 @@ const CreateClient = (props) => {
     // Function to handle saving as a draft
     const handleSaveDraft = async (e) => {
         e.preventDefault();
-        const { name, hobby, company } = formData;
-        if (!(name === "" || hobby === "" || company === "")) {
-            const draftDetails = {
-                ...formData,
-                importantDate: formData.importantDate ? formData.importantDate.toISOString() : null,
-                birthday: formData.birthday ? formData.birthday.toISOString() : null,
-                draftStatus: true
-            };
-            try {
-                await createRecord(draftDetails);
-                console.log('New draft created');
-                resetFields();
-                props.navigate('/draft');
-            } catch (error) {
-                console.error('Error saving draft:', error);
-                alert('Failed to save draft. Data is saved locally.');
-            }
+
+        if (!validateForm()) {
+            return;
+        }
+
+        const cleanedPhoneNumber = formData.phoneNumber.replace(/[^0-9]/g, ''); 
+
+        const draftDetails = {
+            ...formData,
+            importantDate: formData.importantDate ? formData.importantDate.toISOString() : null,
+            birthday: formData.birthday ? formData.birthday.toISOString() : null,
+            phoneNumber: cleanedPhoneNumber, 
+            draftStatus: true
+        };
+        try {
+            await createRecord(draftDetails);
+            console.log('New draft created');
+            resetFields();
+            props.navigate('/draft');
+        } catch (error) {
+            console.error('Error saving draft:', error);
+            alert('Failed to save draft. Data is saved locally.');
         }
     };
 
@@ -69,6 +74,14 @@ const CreateClient = (props) => {
             if (!formData[field].trim()) {
                 alert(`Please fill out the <${field}> field.`);
                 return false;
+            }
+        }
+        const { phoneNumber } = formData; 
+
+        if (phoneNumber.length !== 0) {
+            if (phoneNumber.length !== 12) {
+                alert('Phone number must be either empty or exactly in the format "999-999-9999".');
+                return;
             }
         }
         return true;
@@ -82,23 +95,25 @@ const CreateClient = (props) => {
         if (!validateForm()) {
             return;
         }
-        const { name, hobby, company } = formData;
-        if (!(name === "" || hobby === "" || company === "")) {
-            const clientDetails = {
-                ...formData,
-                importantDate: formData.importantDate ? formData.importantDate.toISOString() : null,
-                birthday: formData.birthday ? formData.birthday.toISOString() : null,
-                draftStatus: false  
-            };
-            try {
-                await createRecord(clientDetails);
-                console.log('New client added');
-                resetFields();
-                props.navigate('/');
-            } catch (error) {
-                console.error('Error adding client:', error);
-                alert('Failed to add client. Data is saved locally.');
-            }
+
+        const cleanedPhoneNumber = formData.phoneNumber.replace(/[^0-9]/g, ''); 
+
+        const clientDetails = {
+            ...formData,
+            importantDate: formData.importantDate ? formData.importantDate.toISOString() : null,
+            birthday: formData.birthday ? formData.birthday.toISOString() : null,
+            phoneNumber: cleanedPhoneNumber, 
+            draftStatus: false  
+        };
+        
+        try {
+            await createRecord(clientDetails);
+            console.log('New client added');
+            resetFields();
+            props.navigate('/');
+        } catch (error) {
+            console.error('Error adding client:', error);
+            alert('Failed to add client. Data is saved locally.');
         }
     };
     
@@ -120,6 +135,17 @@ const CreateClient = (props) => {
         }); 
         localStorage.removeItem('createClientFormData');
     };
+
+    const formatPhoneNumber = (number) => {
+        if (!number) return ''; 
+        const cleaned = number.replace(/\D/g, ''); 
+        const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/); 
+        if (!match) return number;
+        return [match[1], match[2], match[3]]
+            .filter(Boolean)
+            .join('-');
+    };
+    
 
     return (
         <div className='create-client-page-body'>
@@ -205,6 +231,7 @@ const CreateClient = (props) => {
                                 onChange={(date) => handleDateChange('birthday', date)}
                                 placeholderText='YYYY/MM/DD'
                                 portalId="root-portal"
+                                maxDate={new Date()}
                             />
                         </div>
                         <div className='label-input-group'>
@@ -234,10 +261,22 @@ const CreateClient = (props) => {
                             <input
                                 className='phone-number'
                                 name="phoneNumber"
-                                value={formData.phoneNumber}
-                                onChange={handleChange}
+                                placeholder="(999)-999-9999"
+                                value={formatPhoneNumber(formData.phoneNumber)}
+                                onChange={(e) => {
+                                    const formattedValue = e.target.value.replace(/[^0-9()-]/g, '');
+                                    // Limit to 12 characters
+                                    if (formattedValue.length <= 12) {
+                                        setFormData({ ...formData, phoneNumber: formattedValue });
+                                        localStorage.setItem(
+                                            'createClientFormData',
+                                            JSON.stringify({ ...formData, phoneNumber: formattedValue })
+                                        );
+                                    }
+                                }}
                             />
                         </div>
+
                         <div className='label-input-group'>
                             <label>Email</label>
                             <input
