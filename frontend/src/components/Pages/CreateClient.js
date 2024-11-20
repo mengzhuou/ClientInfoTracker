@@ -63,9 +63,25 @@ const CreateClient = (props) => {
         }
     };
 
+    const validateForm = () => {
+        const requiredFields = ['name', 'company', 'hobby'];
+        for (const field of requiredFields) {
+            if (!formData[field].trim()) {
+                alert(`Please fill out the <${field}> field.`);
+                return false;
+            }
+        }
+        return true;
+    };
+    
+
     // Submit client details
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!validateForm()) {
+            return;
+        }
         const { name, hobby, company } = formData;
         if (!(name === "" || hobby === "" || company === "")) {
             const clientDetails = {
