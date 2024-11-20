@@ -120,7 +120,7 @@ const CreateClient = (props) => {
             await createRecord(clientDetails);
             console.log('New client added');
             resetFields();
-            props.navigate('/');
+            props.navigate('/MainPage');
         } catch (error) {
             console.error('Error adding client:', error);
             alert('Failed to add client. Data is saved locally.');
