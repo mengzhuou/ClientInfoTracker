@@ -84,11 +84,6 @@ label {
     gap: 20px;
     justify-content:center;
 }
-.date-important {
-    padding: 10px;
-    padding-right: 50px;
-    margin-right: 20px;
-}
 
 .form-row3 {
     text-align: center;
@@ -270,4 +265,8 @@ label {
 
 .phone-number::placeholder {
     text-align: center;
+}
+
+.must-fill {
+    color: red;
 }

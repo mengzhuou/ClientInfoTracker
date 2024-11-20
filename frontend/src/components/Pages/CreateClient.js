@@ -112,7 +112,7 @@ const CreateClient = (props) => {
                 <form className='form-scrollable'>
                     <div className='form-row1'>
                         <div className='label-input-group'>
-                            <label>Name</label>
+                            <label>Name <span className='must-fill'>*</span></label>
                             <input
                                 className='name'
                                 type="text"
@@ -123,7 +123,7 @@ const CreateClient = (props) => {
                             />
                         </div>
                         <div className='label-input-group'>
-                            <label>Company</label>
+                            <label>Company <span className='must-fill'>*</span></label>
                             <input
                                 className='company'
                                 type="text"
@@ -134,9 +134,8 @@ const CreateClient = (props) => {
                             />
                         </div>
                         <div className='label-input-group'>
-                            <label>Hobby</label>
+                            <label>Hobby <span className='must-fill'>*</span></label>
                             <input
-                                placeholder="Hobby"
                                 className='hobby'
                                 type="text"
                                 required
