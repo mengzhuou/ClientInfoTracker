@@ -43,7 +43,9 @@ class RecordTable extends Component {
     loadRecords = async () => {
         try {
             const records = await getRecords();
+            console.log("records: ", records)
             const reversedRecords = records.reverse();
+            console.log("reversedRecords: ", reversedRecords)
             this.setState({ records: reversedRecords });
         } catch (error) {
             console.error("Error loading records:", error);
@@ -80,12 +82,11 @@ class RecordTable extends Component {
     };
 
     render() {
-        const { rowData } = this.props; 
         return (
             <div className="body">
                 <div className="RecordPageContainer">
                     <AgGridTable
-                        rowData={rowData} 
+                        rowData={this.state.records} 
                         columnDefs={this.state.columnDefs}
                         defaultColDef={this.state.defaultColDef}
                         domLayout={this.state.domLayout}
