@@ -118,10 +118,45 @@ label {
 
 .additional-note {
     padding: 15px;
-    width: 300px;
-    height: 50px;
+    width: fit-content;
+    height: fit-content;
+    min-height: 50px;
+    max-height: 150px;
+    min-width: 300px;
+    max-width: 600px;
     field-sizing: content;
     border-color: #938f8f;
+}
+.note {
+    padding: 15px;
+    width: fit-content;
+    height: fit-content;
+    min-width: 100px;
+    max-width: 400px;
+    max-height: 150px;
+    field-sizing: content;
+    border-color: #938f8f;
+    border-radius: 5px;
+}
+
+.note::placeholder {
+    text-align: center;
+}
+
+/* Hide scrollbar in Webkit browsers (Chrome, Safari) */
+.note::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar in Webkit browsers (Chrome, Safari) */
+.additional-note::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar in IE, Edge, Firefox */
+.note, .additional-note {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .save-draft, .submit, .clear {
@@ -234,13 +269,5 @@ label {
 }
 
 .phone-number::placeholder {
-    text-align: center;
-}
-
-.note {
-    padding: 10px;
-}
-
-.note::placeholder {
     text-align: center;
 }

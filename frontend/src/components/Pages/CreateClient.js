@@ -53,7 +53,7 @@ const CreateClient = (props) => {
             };
             try {
                 await createRecord(draftDetails);
-                console.log('Draft saved successfully');
+                console.log('New draft created');
                 resetFields();
                 props.navigate('/draft');
             } catch (error) {
@@ -161,7 +161,7 @@ const CreateClient = (props) => {
                         </div>
                         <div className='label-input-group'>
                             <label>Note</label>
-                            <input
+                            <textarea
                                 className='note'
                                 type="text"
                                 name="note"

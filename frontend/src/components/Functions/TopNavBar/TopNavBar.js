@@ -54,15 +54,16 @@ class TopNavBar extends Component {
     };
 
     render() {
-        /*if (window.location.pathname === "/entercode") {
+        if (window.location.pathname === "/") {
             return (
-                <div className="navBar"></div>
+                <div className="navBar">
+                </div>
             );
-        }*/
+        }
         return (
             <div className="navBar">
                 <div className="navBar-left">
-                    <NavButton className="navTitle" path="/" text="Zwj Info Tracker" />
+                    <NavButton className="navTitle" path="/MainPage" text="Zwj Info Tracker" />
                 </div>
 
                 <div className="navBar-right">

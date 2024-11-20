@@ -12,17 +12,21 @@ const formatDate = (dateString) => {
     return `${month}-${day} ${hours}:${minutes}`;
 };
 
-// These are draft rows
-const DraftButton = ({ draft, openDeletePopup }) => {
+const DraftButton = ({ draft, openDeletePopup, onRowSelected }) => {
     return (
-        <div className="draft-button">
+        <div
+            className="draft-button"
+            onClick={() => onRowSelected(draft)} // Call row selection function on button click
+        >
             <span className="draft-name">{draft.name}</span>
-            <span className="draft-date">
-                {formatDate(draft.createdAt)}
-            </span>
-            <span className="trash-icon" onClick={(e) => {
-                openDeletePopup(draft._id);
-            }}>
+            <span className="draft-date">{formatDate(draft.createdAt)}</span>
+            <span
+                className="trash-icon"
+                onClick={(e) => {
+                    e.stopPropagation(); // Prevent parent onClick from firing
+                    openDeletePopup(draft._id); // Open delete popup
+                }}
+            >
                 <FontAwesomeIcon icon={faTrashCan} />
             </span>
         </div>

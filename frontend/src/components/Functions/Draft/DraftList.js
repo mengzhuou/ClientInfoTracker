@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import DraftButton from '../../Button/DraftButton/DraftButton';
 import { getDrafts } from '../../../connector.js';
 import './DraftList.css';
+import { useNavigate } from 'react-router-dom';
 
 const DraftList = ({ openDeletePopup }) => {
     const [drafts, setDrafts] = useState([]);
+    const navigate = useNavigate(); // useNavigate hook
 
     useEffect(() => {
         const loadDrafts = async () => {
@@ -20,13 +22,19 @@ const DraftList = ({ openDeletePopup }) => {
         loadDrafts();
     }, []);
 
+
+    const handleRowSelected = (selectedData) => {
+        navigate('/edit-existing-client', { state: { selectedRow: selectedData } });
+    };
+    
+
     return (
         <div className="draft-list">
             {drafts.length === 0 ? (
                 <div className="nodraft-message">No drafts available.</div>
             ) : (
                 drafts.map((draft) => (
-                    <DraftButton key={draft._id} draft={draft} openDeletePopup={openDeletePopup} />
+                    <DraftButton key={draft._id} draft={draft} openDeletePopup={openDeletePopup} onRowSelected={() => handleRowSelected(draft)}/>
                 ))
             )}
         </div>
