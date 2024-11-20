@@ -75,3 +75,13 @@ html {
     width: 0;
     background: transparent;
 }
+
+@media (max-width: 768px) {
+    .ag-header-group-cell-label, .ag-cell-label-container {
+        font-size: 10px;
+    }
+
+    .page-container {
+        width: 98vw;
+    }
+}

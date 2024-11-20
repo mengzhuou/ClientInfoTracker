@@ -48,7 +48,7 @@
     overflow-y: auto;
 }
 
-.save-draft, .edit-submit, .delete {
+.edit-save-draft, .edit-submit, .edit-delete {
     background-color: #CB997E;
     border: none;
     border-radius: 8px;
@@ -61,14 +61,24 @@
     min-width: 100px;
 }
 
-.save-draft:hover, .edit-submit:hover, .delete:hover {
+.edit-save-draft:hover, .edit-submit:hover, .edit-delete:hover {
     background-color: #d1d5db;
 }
 
-.save-draft {
+.edit-save-draft {
     margin-right: 80px;
 }
 
 .edit-submit {
     margin-right: 80px;
+}
+
+@media (max-width: 768px) {
+    .edit-save-draft {
+        margin-right: 30px;
+    }
+    
+    .edit-submit {
+        margin-right: 30px;
+    }
 }

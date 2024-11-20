@@ -271,11 +271,6 @@ label {
 }
 
 @media (max-width: 768px) {
-    .form-scrollable {
-        padding: 50px;
-        padding-right: 20px;
-    }
-    
     .form-row2 {
         flex-direction: row;
         gap: 0;
