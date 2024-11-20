@@ -85,7 +85,7 @@ const CreateClient = (props) => {
             }
         }
     };
-
+    
     // Reset form fields
     const resetFields = () => {
         setFormData({
