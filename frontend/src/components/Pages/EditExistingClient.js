@@ -56,17 +56,46 @@ const EditExistingClient = () => {
             navigate('/MainPage'); // Redirect to main page if no data is found
         }
     }, [location.state, navigate]);
+
+    const formatPhoneNumber = (number) => {
+        if (!number) return '';
+        const cleaned = String(number).replace(/\D/g, ''); // Convert to string before replacing
+        const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/);
+        if (!match) return number;
+        return [match[1], match[2], match[3]].filter(Boolean).join('-');
+    };
     
+    const validateForm = () => {
+        if (phoneNumber.length !== 0) {
+            if (phoneNumber.length !== 12) {
+                alert('Phone number must be either empty or exactly in the format "999-999-9999".');
+                return false;
+            }
+        }
+        return true;
+    };
     
-    
+
+    // removes all fields
+    const resetFields = () => {
+        setName(''); setCompany(''); setHobby(''); setImportantDate('');
+        setNote(''); setFamilySituation(''); setBirthday('');
+        setReasonOfKnowing(''); setPosition(''); setPhoneNumber('');
+        setEmail(''); setAdditionalNote('');
+    };
 
     // Function to handle saving as a draft
     const handleSaveDraft = async (e) => {
+        e.preventDefault(); // prevents refreshing and losing data
         const row = selectedRow;
 
+        if (!validateForm()) {
+            return;
+        }
+    
         if (!(name === "" || hobby === "" || company === "")) {
+            const cleanedPhoneNumber = phoneNumber.replace(/[^0-9]/g, ''); 
             try {
-                e.preventDefault();
                 const draftDetails = {
                     name,
                     company,
@@ -77,7 +106,7 @@ const EditExistingClient = () => {
                     birthday: birthday ? birthday.toISOString() : null,
                     reasonOfKnowing,
                     position,
-                    phoneNumber,
+                    phoneNumber: cleanedPhoneNumber,
                     email,
                     additionalNote,
                     draftStatus: true // Setting draft status to true
@@ -93,26 +122,22 @@ const EditExistingClient = () => {
             }
         }
     };
-    // removes all fields
-    const resetFields = () => {
-        setName(''); setCompany(''); setHobby(''); setImportantDate('');
-        setNote(''); setFamilySituation(''); setBirthday('');
-        setReasonOfKnowing(''); setPosition(''); setPhoneNumber('');
-        setEmail(''); setAdditionalNote('');
-    };
 
-       // upon submission, post data to backend, clear fields, send to home page
-       const handleSubmit = async (e) => {
+    // upon submission, post data to backend, clear fields, send to home page
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // prevents refreshing and losing data
         const row = selectedRow;
         const prevDraftStatus = row.draftStatus;
 
-        if (!(name === "" || hobby === "" || company === "")) {
-            try {
-                e.preventDefault(); // prevents refreshing and losing data
+        if (!validateForm()) {
+            return;
+        }
 
-                
+        if (!(name === "" || hobby === "" || company === "")) {
+            const cleanedPhoneNumber = phoneNumber.replace(/[^0-9]/g, ''); 
+            try {
                     const clientDetails = { name, company, hobby, importantDate: importantDate ? importantDate.toISOString(): null, note, familySituation, birthday: birthday ? birthday.toISOString(): null,
-                        reasonOfKnowing, position, phoneNumber, email, additionalNote, draftStatus: false
+                        reasonOfKnowing, position, phoneNumber: cleanedPhoneNumber, email, additionalNote, draftStatus: false
                     }
                     if(!prevDraftStatus){
                         await updateRecord(row._id,clientDetails);
@@ -188,7 +213,7 @@ const EditExistingClient = () => {
                 <form className='form-scrollable'>
                     <div className='form-row1'>
                         <div className='label-input-group'>
-                            <label>Name</label>
+                            <label>Name <span className='must-fill'>*</span></label>
                             <input
                                 className='name'
                                 type="text"
@@ -198,7 +223,7 @@ const EditExistingClient = () => {
                             />
                         </div>
                         <div className='label-input-group'>
-                            <label>Company</label>
+                            <label>Company <span className='must-fill'>*</span></label>
                             <input
                                 className='company'
                                 type="text"
@@ -208,7 +233,7 @@ const EditExistingClient = () => {
                             />
                         </div>
                         <div className='label-input-group'>
-                            <label>Hobby</label>
+                            <label>Hobby <span className='must-fill'>*</span></label>
                             <input
                                 className='hobby'
                                 type="text"
@@ -289,8 +314,13 @@ const EditExistingClient = () => {
                             <input
                                 className='phone-number'
                                 type="text"
-                                value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                value={formatPhoneNumber(phoneNumber)} 
+                                onChange={(e) => {
+                                    const formattedValue = e.target.value.replace(/[^0-9()-]/g, '');
+                                    if (formattedValue.length <= 12) {
+                                        setPhoneNumber(formattedValue); 
+                                    }
+                                }}
                             />
                         </div>
                         <div className='label-input-group'>
