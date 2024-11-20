@@ -11,7 +11,7 @@ class RecordTable extends Component {
                 { headerName: "Name", field: "name", sortable: true, flex: 1 },
                 { headerName: "Company", field: "company", sortable: true, flex: 1 },
                 { headerName: "Hobby", field: "hobby", sortable: true, flex: 1 },
-                { headerName: "Important Event Date", cellRenderer: this.importantDateFormatter, sortable: true, cellStyle: { 'white-space': 'pre' }, flex: 2, wrapText: true, autoHeight:true },
+                { headerName: "Important Date", cellRenderer: this.importantDateFormatter, sortable: true, cellStyle: { 'white-space': 'pre' }, flex: 2, wrapText: true, autoHeight:true },
                 { headerName: "Family", field: "familySituation", sortable: true, flex: 1 }
             ],
             defaultColDef: { sortable: true, resizable: true },
@@ -80,12 +80,11 @@ class RecordTable extends Component {
     };
 
     render() {
-        const { rowData } = this.props; 
         return (
             <div className="body">
                 <div className="RecordPageContainer">
                     <AgGridTable
-                        rowData={rowData} 
+                        rowData={this.state.records} 
                         columnDefs={this.state.columnDefs}
                         defaultColDef={this.state.defaultColDef}
                         domLayout={this.state.domLayout}

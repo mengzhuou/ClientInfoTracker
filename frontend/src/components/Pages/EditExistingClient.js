@@ -351,9 +351,9 @@ const EditExistingClient = () => {
                         </div>
                     </div>
                     <div className='bottom-buttons'>
-                        <button type="submit" onClick={handleSaveDraft} className='save-draft'>Save Draft</button>
+                        <button type="submit" onClick={handleSaveDraft} className='edit-save-draft'>Save Draft</button>
                         <button type="submit" onClick={handleSubmit} className='edit-submit'>Submit</button>
-                        <button type="button" onClick={()=>handleDelete(location.state)} className='delete'>Delete</button>
+                        <button type="button" onClick={()=>handleDelete(location.state)} className='edit-delete'>Delete</button>
                     </div>
 
                     {isPopupOpen && (
