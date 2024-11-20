@@ -3,7 +3,10 @@ import './NavButton.css';
 
 function NavButton({ className, path, text, navigate }) {
     const handleClick = () => {
-        navigate(path);
+        if (window.location.pathname !== path) { 
+            navigate(path);
+            localStorage.removeItem('createClientFormData');
+        }
     };
 
     return (
