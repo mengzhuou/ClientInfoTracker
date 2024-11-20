@@ -1,82 +1,151 @@
 import React, { useState } from 'react';
 import './CreateClient.css';
-import { useNavigate } from 'react-router-dom';
+import { withFuncProps } from "../withFuncProps";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import { createRecord } from '../../connector';
 
-const CreateClient = () => {
-    // allows me to push users back to the home page after submission
-    const navigate = useNavigate();
+const CreateClient = (props) => {
+    // Initialize formData state from localStorage
+    const savedData = JSON.parse(localStorage.getItem('createClientFormData')) || {};
+    const [formData, setFormData] = useState({
+        name: savedData.name || '',
+        company: savedData.company || '',
+        hobby: savedData.hobby || '',
+        importantDate: savedData.importantDate || '',
+        note: savedData.note || '',
+        familySituation: savedData.familySituation || '',
+        birthday: savedData.birthday || '',
+        reasonOfKnowing: savedData.reasonOfKnowing || '',
+        position: savedData.position || '',
+        phoneNumber: savedData.phoneNumber || '',
+        email: savedData.email || '',
+        additionalNote: savedData.additionalNote || ''
+    });
 
-    // all state variables in form
-    const [name, setName] = useState('');
-    const [company, setCompany] = useState('');
-    const [hobby, setHobby] = useState('');
-    const [importantDate, setImportantDate] = useState('');
-    const [note, setNote] = useState('');
-    const [familySituation, setFamilySituation] = useState('');
-    const [birthday, setBirthday] = useState('');
-    const [reasonOfKnowing, setReasonOfKnowing] = useState('');
-    const [position, setPosition] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [email, setEmail] = useState('');
-    const [additionalNote, setAdditionalNode] = useState('');
+    // Handle input changes and update formData
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        const updatedData = { ...formData, [name]: value };
+        setFormData(updatedData);
+        // Save updated data to localStorage
+        localStorage.setItem('createClientFormData', JSON.stringify(updatedData));
+    };
 
-    // Function to handle saving as a draft
-    const handleSaveDraft = async (e) => {
-        if (!(name === "" || hobby === "" || company === "")) {
+    // Handle date picker changes
+    const handleDateChange = (name, date) => {
+        const updatedData = { ...formData, [name]: date };
+        setFormData(updatedData);
+        // Save updated data to localStorage
+        localStorage.setItem('createClientFormData', JSON.stringify(updatedData));
+    };
+
+    const validateForm = () => {
+        const requiredFields = ['name', 'company', 'hobby'];
+        for (const field of requiredFields) {
+            if (!formData[field].trim()) {
+                alert(`Please fill out the <${field}> field.`);
+                return false;
+            }
+        }
+
+        const { phoneNumber } = formData; 
+        if (phoneNumber.length !== 0) {
+            const cleanedPhoneNumber = phoneNumber.replace(/[^0-9]/g, ''); 
+            if (cleanedPhoneNumber.length !== 10) {
+                alert('Phone number must be either empty or exactly in the format "999-999-9999".');
+                return;
+            }
+        }
+        return true;
+    };
+
+    const formatPhoneNumber = (number) => {
+        if (!number) return ''; 
+        const cleaned = number.replace(/\D/g, ''); 
+        const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/); 
+        if (!match) return number;
+        return [match[1], match[2], match[3]]
+            .filter(Boolean)
+            .join('-');
+    };
+
+        // Function to handle saving as a draft
+        const handleSaveDraft = async (e) => {
+            e.preventDefault();
+    
+            if (!validateForm()) {
+                return;
+            }
+    
+            const cleanedPhoneNumber = formData.phoneNumber.replace(/[^0-9]/g, ''); 
+    
+            const draftDetails = {
+                ...formData,
+                importantDate: formData.importantDate ? formData.importantDate.toISOString() : null,
+                birthday: formData.birthday ? formData.birthday.toISOString() : null,
+                phoneNumber: cleanedPhoneNumber, 
+                draftStatus: true
+            };
             try {
-                e.preventDefault();
-                const draftDetails = {
-                    name,
-                    company,
-                    hobby,
-                    importantDate: importantDate ? importantDate.toISOString() : null,
-                    note,
-                    familySituation,
-                    birthday: birthday ? birthday.toISOString() : null,
-                    reasonOfKnowing,
-                    position,
-                    phoneNumber,
-                    email,
-                    additionalNote,
-                    draftStatus: true // Setting draft status to true
-                };
                 await createRecord(draftDetails);
+                console.log('New draft created');
                 resetFields();
-                navigate('/draft'); // Navigate to drafts page after saving
+                props.navigate('/draft');
             } catch (error) {
                 console.error('Error saving draft:', error);
+                alert('Failed to save draft. Data is saved locally.');
             }
-        }
-    };
-
-    // upon submission, post data to backend, clear fields, send to home page
+        };
+    
+    // Submit client details
     const handleSubmit = async (e) => {
-        if (!(name === "" || hobby === "" || company === "")) {
-            try {
-                e.preventDefault(); // prevents refreshing and losing data
+        e.preventDefault();
 
-                const clientDetails = { name, company, hobby, importantDate: importantDate ? importantDate.toISOString(): null, note, familySituation, birthday: birthday ? birthday.toISOString(): null,
-                    reasonOfKnowing, position, phoneNumber, email, additionalNote, draftStatus: false
-                }
-                await createRecord(clientDetails);
-                resetFields();
-                navigate('/MainPage'); // redirects to home page
-            } catch (error) {
-                console.error('Error adding client: ', error);
-            }
+        if (!validateForm()) {
+            return;
         }
-    }
 
-    // removes all fields
-    const resetFields = () => {
-        setName(''); setCompany(''); setHobby(''); setImportantDate('');
-        setNote(''); setFamilySituation(''); setBirthday('');
-        setReasonOfKnowing(''); setPosition(''); setPhoneNumber('');
-        setEmail(''); setAdditionalNode('');
+        const cleanedPhoneNumber = formData.phoneNumber.replace(/[^0-9]/g, ''); 
+
+        const clientDetails = {
+            ...formData,
+            importantDate: formData.importantDate ? formData.importantDate.toISOString() : null,
+            birthday: formData.birthday ? formData.birthday.toISOString() : null,
+            phoneNumber: cleanedPhoneNumber, 
+            draftStatus: false  
+        };
+        
+        try {
+            await createRecord(clientDetails);
+            console.log('New client added');
+            resetFields();
+            props.navigate('/');
+        } catch (error) {
+            console.error('Error adding client:', error);
+            alert('Failed to add client. Data is saved locally.');
+        }
     };
+    
+    // Reset form fields
+    const resetFields = () => {
+        setFormData({
+            name: '',
+            company: '',
+            hobby: '',
+            importantDate: '',
+            note: '',
+            familySituation: '',
+            birthday: '',
+            reasonOfKnowing: '',
+            position: '',
+            phoneNumber: '',
+            email: '',
+            additionalNote: ''
+        }); 
+        localStorage.removeItem('createClientFormData');
+    };
+    
 
     return (
         <div className='create-client-page-body'>
@@ -85,33 +154,36 @@ const CreateClient = () => {
                 <form className='form-scrollable'>
                     <div className='form-row1'>
                         <div className='label-input-group'>
-                            <label>Name</label>
+                            <label>Name <span className='must-fill'>*</span></label>
                             <input
                                 className='name'
                                 type="text"
                                 required
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='label-input-group'>
-                            <label>Company</label>
+                            <label>Company <span className='must-fill'>*</span></label>
                             <input
                                 className='company'
                                 type="text"
                                 required
-                                value={company}
-                                onChange={(e) => setCompany(e.target.value)}
+                                name="company"
+                                value={formData.company}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='label-input-group'>
-                            <label>Hobby</label>
+                            <label>Hobby <span className='must-fill'>*</span></label>
                             <input
                                 className='hobby'
                                 type="text"
                                 required
-                                value={hobby}
-                                onChange={(e) => setHobby(e.target.value)}
+                                name="hobby"
+                                value={formData.hobby}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
@@ -121,11 +193,10 @@ const CreateClient = () => {
                             <DatePicker
                                 className="date-important"
                                 dateFormat="yyyy/MM/dd"
-                                selected={importantDate}
-                                type="text"
-                                onChange={(date) => setImportantDate(date)}
+                                selected={formData.importantDate}
+                                onChange={(date) => handleDateChange('importantDate', date)}
                                 placeholderText='YYYY/MM/DD'
-                                portalId="root-portal" // keeps the calendar fixed
+                                portalId="root-portal"
                             />
 
                         </div>
@@ -134,8 +205,9 @@ const CreateClient = () => {
                             <textarea
                                 className='note'
                                 type="text"
-                                value={note}
-                                onChange={(e) => setNote(e.target.value)}
+                                name="note"
+                                value={formData.note}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
@@ -145,19 +217,21 @@ const CreateClient = () => {
                             <input
                                 className='family-situation'
                                 type="text"
-                                value={familySituation}
-                                onChange={(e) => setFamilySituation(e.target.value)}
+                                name="familySituation"
+                                value={formData.familySituation}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='label-input-group'>
                             <label>Birthday</label>
                             <DatePicker
                                 className='birthday'
-                                selected={birthday}
+                                selected={formData.birthday}
                                 dateFormat="yyyy/MM/dd"
-                                onChange={(date) => setBirthday(date)}
+                                onChange={(date) => handleDateChange('birthday', date)}
                                 placeholderText='YYYY/MM/DD'
                                 portalId="root-portal"
+                                maxDate={new Date()}
                             />
                         </div>
                         <div className='label-input-group'>
@@ -165,8 +239,9 @@ const CreateClient = () => {
                             <input
                                 className='reason-of-knowing'
                                 type="text"
-                                value={reasonOfKnowing}
-                                onChange={(e) => setReasonOfKnowing(e.target.value)}
+                                name="reasonOfKnowing"
+                                value={formData.reasonOfKnowing}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
@@ -176,27 +251,40 @@ const CreateClient = () => {
                             <label>Position</label>
                             <input
                                 className='position'
-                                type="text"
-                                value={position}
-                                onChange={(e) => setPosition(e.target.value)}
+                                name="position"
+                                value={formData.position}
+                                onChange={handleChange}
                             />
                         </div>
                         <div className='label-input-group'>
                             <label>Phone Number</label>
                             <input
                                 className='phone-number'
-                                type="text"
-                                value={phoneNumber}
-                                onChange={(e) => setPhoneNumber(e.target.value)}
+                                name="phoneNumber"
+                                placeholder="(999)-999-9999"
+                                value={formatPhoneNumber(formData.phoneNumber)}
+                                onChange={(e) => {
+                                    const formattedValue = e.target.value.replace(/[^0-9()-]/g, '');
+                                    // Limit to 12 characters
+                                    if (formattedValue.length <= 12) {
+                                        setFormData({ ...formData, phoneNumber: formattedValue });
+                                        localStorage.setItem(
+                                            'createClientFormData',
+                                            JSON.stringify({ ...formData, phoneNumber: formattedValue })
+                                        );
+                                    }
+                                }}
                             />
                         </div>
+
                         <div className='label-input-group'>
                             <label>Email</label>
                             <input
                                 className='email'
                                 type="text"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
@@ -206,14 +294,17 @@ const CreateClient = () => {
                             <label>Additional Note</label>
                             <textarea
                                 className='additional-note'
-                                value={additionalNote}
-                                onChange={(e) => setAdditionalNode(e.target.value)}
+                                type="text"
+                                name="additionalNote"
+                                value={formData.additionalNote}
+                                onChange={handleChange}
                             />
                         </div>
                     </div>
                     <div className='bottom-buttons'>
                         <button type="submit" onClick={handleSaveDraft} className='save-draft'>Save Draft</button>
                         <button type="submit" onClick={handleSubmit} className='submit'>Submit</button>
+                        {/* <button type="button" onClick={resetFields} className='clear'>Clear</button> */}
                     </div>
                 </form>
             </div>
@@ -221,4 +312,4 @@ const CreateClient = () => {
     );
 }
 
-export default CreateClient;
+export default withFuncProps(CreateClient);

@@ -54,6 +54,7 @@
 }
 
 .form-scrollable {
+    padding: 0px 10px;
     max-height: 80vh;
     overflow: auto;
     padding-bottom: 20px; 
@@ -82,11 +83,6 @@ label {
     padding-top: 8px;
     gap: 20px;
     justify-content:center;
-}
-.date-important {
-    padding: 10px;
-    padding-right: 50px;
-    margin-right: 20px;
 }
 
 .form-row3 {
@@ -126,7 +122,6 @@ label {
     field-sizing: content;
     border-color: #938f8f;
 }
-
 .note {
     padding: 15px;
     width: fit-content;
@@ -159,7 +154,7 @@ label {
     scrollbar-width: none;  /* Firefox */
 }
 
-.save-draft, .submit {
+.save-draft, .submit, .clear {
     background-color: #CB997E;
     border: none;
     border-radius: 8px;
@@ -172,13 +167,27 @@ label {
     min-width: 100px;
 }
 
+.clear {
+    background-color: #cc2323;
+}
+
 .save-draft:hover, .submit:hover {
     background-color: #d1d5db;
+}
+
+.clear:hover {
+    background-color: #c74949;
 }
 
 .save-draft {
     margin-right: 80px;
 }
+
+/*
+.submit {
+    margin-right: 80px;
+}
+*/
 
 .name {
     padding: 10px;
@@ -256,6 +265,10 @@ label {
 
 .phone-number::placeholder {
     text-align: center;
+}
+
+.must-fill {
+    color: red;
 }
 
 @media (max-width: 768px) {
@@ -369,4 +382,3 @@ label {
         align-items: center;
     }
 }
-
