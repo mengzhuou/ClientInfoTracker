@@ -40,34 +40,6 @@ const CreateClient = (props) => {
         localStorage.setItem('createClientFormData', JSON.stringify(updatedData));
     };
 
-    // Function to handle saving as a draft
-    const handleSaveDraft = async (e) => {
-        e.preventDefault();
-
-        if (!validateForm()) {
-            return;
-        }
-
-        const cleanedPhoneNumber = formData.phoneNumber.replace(/[^0-9]/g, ''); 
-
-        const draftDetails = {
-            ...formData,
-            importantDate: formData.importantDate ? formData.importantDate.toISOString() : null,
-            birthday: formData.birthday ? formData.birthday.toISOString() : null,
-            phoneNumber: cleanedPhoneNumber, 
-            draftStatus: true
-        };
-        try {
-            await createRecord(draftDetails);
-            console.log('New draft created');
-            resetFields();
-            props.navigate('/draft');
-        } catch (error) {
-            console.error('Error saving draft:', error);
-            alert('Failed to save draft. Data is saved locally.');
-        }
-    };
-
     const validateForm = () => {
         const requiredFields = ['name', 'company', 'hobby'];
         for (const field of requiredFields) {
@@ -76,18 +48,56 @@ const CreateClient = (props) => {
                 return false;
             }
         }
-        const { phoneNumber } = formData; 
 
+        const { phoneNumber } = formData; 
         if (phoneNumber.length !== 0) {
-            if (phoneNumber.length !== 12) {
+            const cleanedPhoneNumber = phoneNumber.replace(/[^0-9]/g, ''); 
+            if (cleanedPhoneNumber.length !== 10) {
                 alert('Phone number must be either empty or exactly in the format "999-999-9999".');
                 return;
             }
         }
         return true;
     };
-    
 
+    const formatPhoneNumber = (number) => {
+        if (!number) return ''; 
+        const cleaned = number.replace(/\D/g, ''); 
+        const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/); 
+        if (!match) return number;
+        return [match[1], match[2], match[3]]
+            .filter(Boolean)
+            .join('-');
+    };
+
+        // Function to handle saving as a draft
+        const handleSaveDraft = async (e) => {
+            e.preventDefault();
+    
+            if (!validateForm()) {
+                return;
+            }
+    
+            const cleanedPhoneNumber = formData.phoneNumber.replace(/[^0-9]/g, ''); 
+    
+            const draftDetails = {
+                ...formData,
+                importantDate: formData.importantDate ? formData.importantDate.toISOString() : null,
+                birthday: formData.birthday ? formData.birthday.toISOString() : null,
+                phoneNumber: cleanedPhoneNumber, 
+                draftStatus: true
+            };
+            try {
+                await createRecord(draftDetails);
+                console.log('New draft created');
+                resetFields();
+                props.navigate('/draft');
+            } catch (error) {
+                console.error('Error saving draft:', error);
+                alert('Failed to save draft. Data is saved locally.');
+            }
+        };
+    
     // Submit client details
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -134,16 +144,6 @@ const CreateClient = (props) => {
             additionalNote: ''
         }); 
         localStorage.removeItem('createClientFormData');
-    };
-
-    const formatPhoneNumber = (number) => {
-        if (!number) return ''; 
-        const cleaned = number.replace(/\D/g, ''); 
-        const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,4})$/); 
-        if (!match) return number;
-        return [match[1], match[2], match[3]]
-            .filter(Boolean)
-            .join('-');
     };
     
 

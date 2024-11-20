@@ -48,7 +48,7 @@ const EditExistingClient = () => {
             setBirthday(row.birthday ? new Date(row.birthday) : '');
             setReasonOfKnowing(row.reasonOfKnowing || '');
             setPosition(row.position || '');
-            setPhoneNumber(row.phoneNumber || '');
+            setPhoneNumber(row.phoneNumber ? String(row.phoneNumber) : ''); 
             setEmail(row.email || '');
             setAdditionalNote(row.additionalNote || '');
         } else {
@@ -67,11 +67,14 @@ const EditExistingClient = () => {
     
     const validateForm = () => {
         if (phoneNumber.length !== 0) {
-            if (phoneNumber.length !== 12) {
+            const cleanedPhoneNumber = phoneNumber.replace(/\D/g, ''); 
+            if (cleanedPhoneNumber.length !== 10) {
                 alert('Phone number must be either empty or exactly in the format "999-999-9999".');
                 return false;
             }
         }
+
+        
         return true;
     };
     
@@ -93,8 +96,9 @@ const EditExistingClient = () => {
             return;
         }
     
-        if (!(name === "" || hobby === "" || company === "")) {
-            const cleanedPhoneNumber = phoneNumber.replace(/[^0-9]/g, ''); 
+        if (!(name === "" || hobby === "" || company === "")) { 
+            const cleanedPhoneNumber = phoneNumber.replace(/\D/g, ''); 
+
             try {
                 const draftDetails = {
                     name,
@@ -134,7 +138,7 @@ const EditExistingClient = () => {
         }
 
         if (!(name === "" || hobby === "" || company === "")) {
-            const cleanedPhoneNumber = phoneNumber.replace(/[^0-9]/g, ''); 
+            const cleanedPhoneNumber = phoneNumber.replace(/\D/g, ''); 
             try {
                     const clientDetails = { name, company, hobby, importantDate: importantDate ? importantDate.toISOString(): null, note, familySituation, birthday: birthday ? birthday.toISOString(): null,
                         reasonOfKnowing, position, phoneNumber: cleanedPhoneNumber, email, additionalNote, draftStatus: false
@@ -199,6 +203,7 @@ const EditExistingClient = () => {
             return row.updatedAt ? new Date(row.updatedAt).toLocaleString() : "No update time available";
         }
     };
+
 
     return (
         <div className='edit-client-page-body'>
@@ -316,11 +321,12 @@ const EditExistingClient = () => {
                                 type="text"
                                 value={formatPhoneNumber(phoneNumber)} 
                                 onChange={(e) => {
-                                    const formattedValue = e.target.value.replace(/[^0-9()-]/g, '');
-                                    if (formattedValue.length <= 12) {
+                                    const formattedValue = e.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+                                    if (formattedValue.length <= 10) {
                                         setPhoneNumber(formattedValue); 
                                     }
                                 }}
+                                
                             />
                         </div>
                         <div className='label-input-group'>
