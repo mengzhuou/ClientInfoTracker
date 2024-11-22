@@ -1,0 +1,25 @@
+{
+  "name": "clientinfotracker",
+  "version": "1.0.0",
+  "description": "General Coding Guideline\r 1. Always \"git pull\" on main branch before creating a new branch\r 2. Always make sure your component style (i.e. color, padding, font) matches Figma. \r 3. Always leave comment (but not too much) for complex code.\r 4. Always use variable name that is easy to understand (but not too long). variable name should be this style: thisStyleIsFine. \r 6. Always check styles from other files and make sure that you follow similar folder structure before asking for PR review. \r 7. Always create the modular component and import to the page.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd backend && node server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-async-handler": "^1.2.0",
+    "express-rate-limit": "^7.4.0",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.3",
+    "uuid": "^10.0.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
