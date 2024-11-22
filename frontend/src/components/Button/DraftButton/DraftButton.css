@@ -1,0 +1,81 @@
+.draft-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 25px;
+    min-width: 40vw;
+    background: #FFF;
+    padding: 30px 10px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.draft-button:hover {
+    background-color: #e2e6ea;
+}
+
+.draft-name {
+    flex: 1;
+    position: absolute;
+    left: 20px;
+    color: #000;
+    font-family: 'Montserrat';
+    font-size: clamp(20px, 5vw, 30px);
+    font-weight: 400;
+    white-space: nowrap;
+    max-width: calc(60% - 60px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.draft-date {
+    position: absolute;
+    right: 20%;
+    color: #9C9C9C;
+    font-family: "Montserrat";
+    font-size: clamp(20px, 5vw, 30px);
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.trash-icon {
+    position: absolute;
+    right: 20px;
+    font-size: clamp(20px, 5vw, 30px);
+    cursor: pointer;
+    color: #000;
+}
+
+.trash-icon:hover {
+    color: #c82333;
+}
+
+@media (max-width: 768px) {
+
+    .draft-name {
+        top: 10px;
+        max-width: 80%;
+        word-wrap: break-word;
+        white-space: nowrap;
+    }
+    .draft-date {
+        left: 20px;
+        bottom: 10px;
+        text-align: left;
+    }
+    .trash-icon {
+        bottom: 10px;
+    }
+
+    .draft-button {
+        min-height: 40px;
+    }
+
+}

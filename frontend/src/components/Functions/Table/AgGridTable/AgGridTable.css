@@ -11,7 +11,7 @@ html {
 }
 
 .page-container {
-    width: 70vw;
+    width: 80vw;
     height: auto;
     overflow-y: visible;
 }
@@ -41,7 +41,8 @@ html {
 }
 
 .ag-header-group-cell-label, .ag-cell-label-container {
-    font-size: 24px;
+    font-size: 22px;
+    font-family: serif;
 }
 
 .ag-center-cols-viewport {
@@ -63,4 +64,24 @@ html {
     color: #CB997E;
     font-weight: bold;
     font-size: 15px;
+}
+
+.ag-body .ag-theme-alpine {
+    max-height: 450px;
+    overflow-y: scroll;
+}
+
+.ag-body .ag-theme-alpine::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+@media (max-width: 768px) {
+    .ag-header-group-cell-label, .ag-cell-label-container {
+        font-size: 10px;
+    }
+
+    .page-container {
+        width: 98vw;
+    }
 }

@@ -1,0 +1,84 @@
+.title {
+    font-family: sans-serif;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    text-align: center;
+    color: #000000;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    -webkit-text-stroke-width: clamp(1px, 0.3vw, 2px);
+    font-size: clamp(35px, 3vw, 45px);
+    font-style: normal;
+    margin-bottom: 12px;
+}
+
+.last-update-time-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.updateLabel {
+    color: #9C9C9C;
+}
+
+.updatedAt {
+    margin-left: 5px; /* Space between "Last Updated Time:" and timestamp */
+    white-space: nowrap; /* Prevents the text from wrapping to a new line */
+    color: #9C9C9C;
+}
+
+.edit-client-page-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin-top: 100px;
+    width: 100vw;
+}
+
+
+.edit-client-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.edit-save-draft, .edit-submit, .edit-delete {
+    background-color: #CB997E;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease-in-out;
+    min-width: 100px;
+}
+
+.edit-save-draft:hover, .edit-submit:hover, .edit-delete:hover {
+    background-color: #d1d5db;
+}
+
+.edit-save-draft {
+    margin-right: 80px;
+}
+
+.edit-submit {
+    margin-right: 80px;
+}
+
+@media (max-width: 768px) {
+    .edit-save-draft {
+        margin-right: 30px;
+    }
+    
+    .edit-submit {
+        margin-right: 30px;
+    }
+}

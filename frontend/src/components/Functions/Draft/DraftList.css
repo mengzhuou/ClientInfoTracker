@@ -1,0 +1,40 @@
+.draft-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 60%;
+    padding: 20px;
+    gap: 15px;
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Hide scrollbar in Webkit browsers (Chrome, Safari) */
+.draft-list::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar in IE, Edge, Firefox */
+.draft-list {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.nodraft-message {
+    position: absolute;
+    color: #ff0000;
+    font-family: 'Montserrat';
+    font-size: 30px;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+
+    .draft-list {
+        width: 80%;
+    }
+
+}
