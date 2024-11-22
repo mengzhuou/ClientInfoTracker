@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { withFuncProps } from "../../withFuncProps";
 import NavButton from "../../Button/NavButton/NavButton"
+import ExportButton from "../../Button/ExportButton/ExportButton";  
+
 import './TopNavBar.css';
 
 class TopNavBar extends Component {
@@ -70,7 +72,7 @@ class TopNavBar extends Component {
                     <ul className="nav-list">
                         <li><NavButton className="nav-button" path="/draft" text="Draft" /></li>
                         <li><NavButton className="nav-button" path="/create-client" text="Create Client" /></li>
-                        <li><NavButton className="nav-button" path="/export" text="Export" /></li>
+                        <li><ExportButton /></li>
                     </ul>
                     <div ref={this.iconRef} className="dropdownIcon" onClick={this.toggleDropdown}>
                         &#9776;
@@ -79,7 +81,7 @@ class TopNavBar extends Component {
                     <ul ref={this.menuRef} className={`dropdown-container ${this.state.animationClass}`}>
                         <li><NavButton className="dropdown-content" path="/draft" text="Draft" /></li>
                         <li><NavButton className="dropdown-content" path="/create-client" text="Create Client" /></li>
-                        <li><NavButton className="dropdown-content" path="/export" text="Export" /></li>
+                        <li><ExportButton /></li>
                     </ul>
                     ) : null}
                 </div>
