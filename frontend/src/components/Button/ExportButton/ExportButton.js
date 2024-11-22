@@ -23,14 +23,16 @@ function ExportButton() {
             
             //Format the sheet to the length of the longest term in each column
             const allKeys = [...new Set(records.flatMap(record => Object.keys(record)))];
-            const colWidths = allKeys.map(key => {
+      
+            const colWidths = Object.keys(filteredRecords[0] || {}).map(key => {
                 const maxLength = Math.max(
                     key.length, // Header length
-                    ...filteredRecords.map(record => (record[key] || "N/A").toString().length) // Values length
+                    ...filteredRecords.map(record => record[key]?.toString().length || 0) // Data lengths
                 );
-                return { wch: maxLength + 2 }; 
+                return { wch: maxLength + 2 }; // Add padding
             });
             worksheet['!cols'] = colWidths;
+            
 
             // Generate the Excel file and trigger the download
             XLSX.writeFile(workbook, 'Filtered_Records.xlsx');
