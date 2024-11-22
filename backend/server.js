@@ -13,16 +13,8 @@ const mongoose = require("mongoose");
 const corsOptions = require("./config/corsOptions");
 
 if (process.env.NODE_ENV === 'production') {
-  app.get("/*", function (req, res) {
-    res.sendFile(
-        path.join(__dirname, "../frontend/build/index.html"),
-        function (err) {
-            if (err) {
-                res.status(500).send(err);
-            }
-        }
-    );
-});
+  app.use('/*', express.static(path.join(__dirname, '../frontend/build')));
+};
 
 // Connect to the database
 connectDB();
