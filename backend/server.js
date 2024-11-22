@@ -13,8 +13,15 @@ const mongoose = require("mongoose");
 const corsOptions = require("./config/corsOptions");
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('/*', express.static(path.join(__dirname, '../frontend/build')));
-};
+  // Serve static files from the React app
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+  // Handle React routing, return all requests to React's index.html
+  app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, '../frontend/build', 'index.html'));
+  });
+}
+
 
 // Connect to the database
 connectDB();
