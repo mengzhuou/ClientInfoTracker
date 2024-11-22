@@ -11,7 +11,17 @@ function ExportButton() {
             const filteredRecords = records.map(record => 
                 Object.keys(record).reduce((acc, key) => {
                     if (key !== '__v' && key !== '_id') { 
-                        acc[key] = record[key] || "N/A"; 
+                        if (key === 'importantDate' || key === 'birthday') {
+                            const date = new Date(record[key]);
+                            acc[key] = !isNaN(date) ? date.toISOString().split('T')[0] : "N/A"; // Format as yyyy-MM-DD
+                        } else if (key === 'createdAt' || key === 'updatedAt') {
+                            const date = new Date(record[key]);
+                            acc[key] = !isNaN(date) 
+                                ? date.toLocaleString('en-GB', { hour12: false }).replace(',', '') // Format as yyyy-MM-DD HH:MM:SS
+                                : "N/A";
+                        } else {
+                            acc[key] = record[key] || "N/A";
+                        }
                     }
                     return acc;
                 }, {})
@@ -20,10 +30,7 @@ function ExportButton() {
             const worksheet = XLSX.utils.json_to_sheet(filteredRecords); 
             const workbook = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(workbook, worksheet, 'Filtered Records');
-            
-            //Format the sheet to the length of the longest term in each column
-            const allKeys = [...new Set(records.flatMap(record => Object.keys(record)))];
-      
+
             const colWidths = Object.keys(filteredRecords[0] || {}).map(key => {
                 const maxLength = Math.max(
                     key.length, // Header length
