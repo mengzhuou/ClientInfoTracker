@@ -36,6 +36,14 @@ function ExportButton() {
             const workbook = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(workbook, worksheet, 'Filtered Records');
 
+            const headers = Object.keys(filteredRecords[0] || {});
+            headers.forEach((header, index) => {
+                const cellAddress = XLSX.utils.encode_cell({ r: 0, c: index }); // Header cell address
+                if (worksheet[cellAddress]) {
+                    worksheet[cellAddress].v = header.charAt(0).toUpperCase() + header.slice(1); // Capitalize first letter of header
+                }
+            });
+
             const colWidths = Object.keys(filteredRecords[0] || {}).map(key => {
                 const maxLength = Math.max(
                     key.length, // Header length
