@@ -8,10 +8,11 @@ function ExportButton() {
         try {
             const records = await getRecords();
 
-            console.log("Fetched records:", records);
             const filteredRecords = records.map(record => 
                 Object.keys(record).reduce((acc, key) => {
-                    acc[key] = record[key] || "N/A"; 
+                    if (key !== '__v' && key !== '_id') { 
+                        acc[key] = record[key] || "N/A"; 
+                    }
                     return acc;
                 }, {})
             );
