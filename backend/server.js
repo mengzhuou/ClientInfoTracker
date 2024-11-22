@@ -15,23 +15,23 @@ const corsOptions = require("./config/corsOptions");
 // Connect to the database
 connectDB();
 
-app.get("/*", function (req, res) {
-  res.sendFile(
-      path.join(__dirname, "../client/build/index.html"),
-      function (err) {
-          if (err) {
-              res.status(500).send(err);
-          }
-      }
-  );
-});
-
 // Middleware
 app.use(logger);
 app.use(cors(corsOptions));
 app.use(express.json()); 
 app.use(cookieParser());
-app.use('/', express.static(path.join(__dirname, '/public')));
+
+// original code
+// app.use('/', express.static(path.join(__dirname, '/public')));
+
+app.use('/', express.static(path.join(__dirname, '../frontend/build')));
+
+// Fallback for React's client-side routing
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
+});
+
+app.use('/', express.static(path.join(__dirname, '../frontend/build/index.html')));
 app.use("/", require("./routes/root"));
 app.use("/students", require("./routes/studentsRoutes"));
 app.use("/records", require("./routes/recordRoutes"));
