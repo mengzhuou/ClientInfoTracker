@@ -19,6 +19,11 @@ function ExportButton() {
                             acc[key] = !isNaN(date) 
                                 ? date.toLocaleString('en-GB', { hour12: false }).replace(',', '') // Format as yyyy-MM-DD HH:MM:SS
                                 : "N/A";
+                        } else if (key === 'phoneNumber') {
+                            const phone = record[key]?.toString(); // Convert to string
+                            acc[key] = phone && /^\d{10}$/.test(phone)
+                                ? `(${phone.slice(0, 3)})-${phone.slice(3, 6)}-${phone.slice(6)}`
+                                : "N/A"; // Format as (xxx)-xxx-xxxx or "N/A" if invalid
                         } else {
                             acc[key] = record[key] || "N/A";
                         }
